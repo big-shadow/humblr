@@ -5,7 +5,8 @@ The Developer's Reference. :)
 Here are some quick links to explore things in depth.
 
 1. [Laravel 5.5](https://laravel.com/docs/5.5)
-2. [Git Configuration](https://github.com/ray-winkelman/git-configuration)
+2. [Migrations](https://laravel.com/docs/5.5/migrations)
+3. [Git Configuration](https://github.com/ray-winkelman/git-configuration)
 
 ### Environment
 1. Git (It's recommended to use [this](https://github.com/ray-winkelman/git-configuration) Git configuaration)
@@ -13,7 +14,7 @@ Here are some quick links to explore things in depth.
 3. libgnome-keyring (optional) (Linux only)
 4. PHP >= 7.0.0
 ⋅⋅* OpenSSL PHP Extension
-⋅⋅* PDO PHP Extension
+⋅⋅* PDO PHP Extension (Uncomment in /etc/php/php.ini)
 ⋅⋅* Mbstring PHP Extension
 ⋅⋅* Tokenizer PHP Extension
 ⋅⋅* XML PHP Extension
@@ -48,6 +49,9 @@ Pass: Roomservice123!
 ```
 
 Shoot me (Ray) an e-mail for phpMyAdmin creds - if you need them.
+
+### Migrate (If local DB)
+If you have a local DB connection, run `php artisan migrate` to deploy the database.
 
 ### Serve
 This command will start a development server at http://localhost:8000
