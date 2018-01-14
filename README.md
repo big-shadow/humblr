@@ -9,17 +9,17 @@ Here are some quick links to explore things in depth.
 3. [Git Configuration](https://github.com/ray-winkelman/git-configuration)
 
 ### Environment
-1. Git (It's recommended to use [this](https://github.com/ray-winkelman/git-configuration) Git configuaration)
+1. Git (It's recommended to use [this](https://github.com/ray-winkelman/git-configuration) Git configuaration - Replace the name/email with your own)
 2. Meld mergetool (or tool of choice)
 3. libgnome-keyring (optional) (Linux only)
 4. PHP >= 7.0.0
-⋅⋅* OpenSSL PHP Extension
-⋅⋅* PDO PHP Extension (Uncomment in /etc/php/php.ini)
-⋅⋅* Mbstring PHP Extension
-⋅⋅* Tokenizer PHP Extension
-⋅⋅* XML PHP Extension
-5. MySQL or MariaDB(preferred) (optional)
-6. Composer
+5. OpenSSL PHP Extension (optional)
+6. PDO PHP Extension (Uncomment in /etc/php/php.ini)
+7. Mbstring PHP Extension (optional)
+8. Tokenizer PHP Extension (optional)
+9. XML PHP Extension (optional)
+10. MySQL or MariaDB(preferred) (optional)
+11. Composer
 
 ### Config
 Grab the `laravel` program (not the framework) with composer.
