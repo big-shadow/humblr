@@ -41,17 +41,20 @@ Check out the `.env.example` file to configure your enviroment. Rename this to `
 #### Database Conf.
 You CAN install MySQL or MariaDB but's recommended to offload the overhead to our development DB instances. Laravel's migrations mean we won't be writing SQL, anyway!
 
+Copy this to your `.env`
 ```
-https://sumac.websavers.ca:3306
-DB: roomservicedev, roomservicedev2
-User: roomservice
-Pass: Roomservice123!
+DB_CONNECTION=mysql
+DB_HOST=mkybox.com
+DB_PORT=3306
+DB_DATABASE=ray_roomservicedev1
+DB_USERNAME=ray_roomservice
+DB_PASSWORD=Roomservice123!
 ```
 
 Shoot me (Ray) an e-mail for phpMyAdmin creds - if you need them.
 
 ### Migrate (If local DB)
-If you have a local DB connection, run `php artisan migrate` to deploy the database.
+If you have a local DB connection, or empty database, run `php artisan migrate` to deploy the database.
 
 ### Serve
 This command will start a development server at http://localhost:8000
