@@ -1,13 +1,13 @@
 import Vue from 'vue'
 
 import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.css'
+//import 'vuetify/dist/vuetify.css'
 
 import App from './App'
 import router from './router'
 
 Vue.use(Vuetify, { theme: {
-  primary: '#ee44aa',
+  primary: '#42b983',
   secondary: '#424242',
   accent: '#82B1FF',
   error: '#FF5252',

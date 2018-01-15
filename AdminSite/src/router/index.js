@@ -1,15 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Dashboard from '@/components/Dashboard'
+import Inventory from '@/components/Inventory'
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
+    routes: [
+        {
+            path: '/',
+            name: 'Dashboard',
+            component: Dashboard
+        },
+        {
+            path: '/inventory',
+            name: 'Inventory',
+            component: Inventory
+        }
+    ]
 })
