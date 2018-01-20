@@ -1,9 +1,10 @@
 <template>
-    <div class="hello">
+    <div class="text-xs-center">
         <h1>{{ msg }}</h1>
         <div class="links mt-2">
-            <a href="#">Products</a>
             <a href="#">Drivers</a>
+            <a href="#">Inventory</a>
+            <a href="#">Orders</a>
         </div>
     </div>
 </template>
@@ -24,21 +25,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    h1, h2 {
-        font-weight: normal;
-    }
 
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-
-    a {
-        color: #42b983;
-    }
 </style>

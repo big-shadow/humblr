@@ -12,11 +12,13 @@
                 </v-card-title>
                 <v-card-text>
                     <v-text-field
+                            @keyup.enter="login"
                             v-model="username"
                             box
                             label="E-mail Address"
                     ></v-text-field>
                     <v-text-field
+                            @keyup.enter="login"
                             v-model="password"
                             box
                             label="Password"
@@ -41,7 +43,7 @@
             }
         },
         methods: {
-            login() {
+            login: _.throttle(function () {
                 const data = new FormData()
                 data.append('client_id', 2)
                 data.append('client_secret', 'oOqNudYy72K0Rvng4ClpUa2DEHr3Lj4sSDxTqKl5')
@@ -57,7 +59,7 @@
                     console.log(e)
                     alert('Invalid Credentials.')
                 })
-            }
+            }, 1000)
         }
     }
 </script>
