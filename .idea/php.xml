@@ -73,6 +73,21 @@
       <path value="$PROJECT_DIR$/RoomService/vendor/laravel/framework" />
       <path value="$PROJECT_DIR$/RoomService/vendor/jakub-onderka/php-console-color" />
       <path value="$PROJECT_DIR$/RoomService/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/league/oauth2-server" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/league/event" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/laravel/passport" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/symfony/psr-http-message-bridge" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/defuse/php-encryption" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/zendframework/zend-diactoros" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/asm89/stack-cors" />
+      <path value="$PROJECT_DIR$/RoomService/vendor/barryvdh/laravel-cors" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />

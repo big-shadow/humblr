@@ -2,12 +2,17 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * A basic user class, extended to use Passport for API auth.
+ * Author: Ray Winkelman
+ */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use  HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.

@@ -16,7 +16,7 @@
         },
         data() {
             return {
-                msg: 'Welcome to Your Administrative Dashboard'
+                msg: 'Room Service Administrative Dashboard'
             }
         }
     }
