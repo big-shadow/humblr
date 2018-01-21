@@ -3,7 +3,7 @@
         <h1>{{ msg }}</h1>
         <div class="links mt-2">
             <a href="#">Drivers</a>
-            <a href="#">Inventory</a>
+            <router-link to="/inventory">Inventory</router-link>
             <a href="#">Orders</a>
         </div>
     </div>

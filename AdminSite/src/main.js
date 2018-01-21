@@ -1,8 +1,6 @@
 import Vue from 'vue'
-
 import Vuetify from 'vuetify'
-
-//import 'vuetify/dist/vuetify.css'
+import Vue2Filters from 'vue2-filters'
 
 import App from './App'
 import router from './router'
@@ -10,6 +8,7 @@ import router from './router'
 // Managed packages
 import Axios from './packages/axios/Axios'
 import Auth from './packages/auth/Auth'
+import File from './packages/file/File'
 
 Vue.use(Vuetify, { theme: {
   primary: '#42b983',
@@ -23,6 +22,8 @@ Vue.use(Vuetify, { theme: {
 
 Vue.use(Auth)
 Vue.use(Axios)
+Vue.use(File)
+Vue.use(Vue2Filters)
 
 Vue.config.productionTip = false
 
