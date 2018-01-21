@@ -17,7 +17,7 @@
             </v-navigation-drawer>
             <v-toolbar fixed app clipped-left>
                 <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-                <v-toolbar-title v-text="title" class="title"></v-toolbar-title>
+                <v-toolbar-title v-text="appName" class="title"></v-toolbar-title>
             </v-toolbar>
         </template>
         <v-content>
@@ -28,7 +28,7 @@
             </v-container>
         </v-content>
         <v-footer app v-if="!$route.meta.public">
-            <span>Room Service &copy; {{year}}</span>
+            <span>{{ appName }} &copy; {{year}}</span>
             <v-spacer></v-spacer>
             <a @click="logout">Log Out</a>
         </v-footer>
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
+
     export default {
         data() {
             return {
@@ -51,15 +53,17 @@
                         title: 'Inventory',
                         href: '/inventory'
                     }
-                ],
-                title: 'Room Service Admin'
+                ]
             }
         },
         computed: {
-            year: () => (new Date()).getFullYear()
+            year: () => (new Date()).getFullYear(),
+            ...mapGetters([
+                'appName'
+            ])
         },
-        methods:{
-            logout(){
+        methods: {
+            logout() {
                 this.$auth.destroyToken()
                 this.$router.push('/login')
             }

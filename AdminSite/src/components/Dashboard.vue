@@ -1,6 +1,6 @@
 <template>
     <div class="text-xs-center">
-        <h1>{{ msg }}</h1>
+        <h1>{{ appName }} Administrative Dashboard</h1>
         <div class="links mt-2">
             <a href="#">Drivers</a>
             <router-link to="/inventory">Inventory</router-link>
@@ -10,6 +10,8 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
+
     export default {
         name: 'Dashboard',
         created() {
@@ -17,9 +19,14 @@
         },
         data() {
             return {
-                msg: 'Room Service Administrative Dashboard'
+                prop: ''
             }
-        }
+        },
+        computed: {
+            ...mapGetters([
+                'appName'
+            ])
+        },
     }
 </script>
 
