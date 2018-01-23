@@ -12,7 +12,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         factory(\App\User::class, 1)->create();
-        factory(\App\Product::class, 100)->create();
+
+        /* -- Relational Stuff --*/
+        $distributionCenters = factory(App\DistributionCenter::class, 'SimpleDistCenter', 2)->create();
+
+        factory(\App\ProductInventory::class, 50)->create([
+            'distribution_center_id' => $distributionCenters[0]->id
+        ]);
+
+        factory(\App\ProductInventory::class, 50)->create([
+            'distribution_center_id' => $distributionCenters[1]->id
+        ]);
 
         $ray = new \App\User();
         $ray->name = 'Ray Winkelman';
