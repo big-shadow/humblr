@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductInventoryTable extends Migration
+class CreateProductCostAuditsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateProductInventoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_inventories', function (Blueprint $table) {
+        Schema::create('product_cost_audits', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('product_id')->unsigned();
-            $table->integer('distribution_center_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('distribution_center_id')->references('id')->on('distribution_centers');
-            $table->integer('quantity');
+            $table->integer('units_purchased');
+            $table->double('total_cost');
+            $table->double('cost_per_unit');
+            $table->string('supplier_note', 512);
             $table->timestamps();
+            $table->integer('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
@@ -31,8 +32,6 @@ class CreateProductInventoryTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('product_inventories');
-        Schema::enableForeignKeyConstraints();
+        Schema::dropIfExists('product_cost_audits');
     }
 }

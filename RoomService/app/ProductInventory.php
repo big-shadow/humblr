@@ -12,7 +12,7 @@ class ProductInventory extends Model
      * @var array
      */
     protected $fillable = [
-        'cost_per_unit', 'quantity'
+        'quantity'
     ];
 
     /**

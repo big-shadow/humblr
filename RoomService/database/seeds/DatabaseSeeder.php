@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             'distribution_center_id' => $distributionCenters[1]->id
         ]);
 
+        factory(App\ProductCostAudit::class, 10)->create();
+
         $ray = new \App\User();
         $ray->name = 'Ray Winkelman';
         $ray->email = 'raywinkelman@gmail.com';

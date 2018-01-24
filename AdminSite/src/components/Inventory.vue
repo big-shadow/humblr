@@ -1,13 +1,19 @@
 <template>
     <div>
-        <div class="text-xs-center">
-            <h1 class="headline">Inventory</h1>
-            <p class="body-1 grey--text">Update product information, and inventory.</p>
-        </div>
+        <v-layout row wrap align-center>
+            <v-flex md4 class="px-2">
+                <h1 class="headline">Inventory</h1>
+                <p class="body-1 grey--text">Update product information, and inventory.</p>
+            </v-flex>
+            <v-spacer></v-spacer>
+            <v-flex md4>
+                <v-text-field box label="Search" v-model="search" placeholder="Begin Typing!"
+                              append-icon="search" color="yellow lighten-2"></v-text-field>
+            </v-flex>
+        </v-layout>
         <v-data-table
                 v-bind:headers="headers"
                 v-bind:items="products"
-                v-bind:search="search"
                 v-bind:pagination.sync="pagination"
                 hide-actions
                 class="elevation-1"
@@ -21,6 +27,7 @@
                 <td>{{ props.item.title }}</td>
                 <td>{{ props.item.description | truncate(35) }}</td>
                 <td class="text-xs-right">{{ props.item.price | currency }}</td>
+                <td class="text-xs-right">{{ props.item.gross_stock }}</td>
                 <td class="text-xs-center">
                     <v-btn flat icon color="primary" @click="editProduct(props.item)">
                         <v-icon>edit</v-icon>
@@ -31,7 +38,7 @@
         <div class="text-xs-center pt-2">
             <v-pagination v-model="pagination.pager" :length="pagination.pages"></v-pagination>
         </div>
-        <component :active.sync="partials.edit.active" :is="partials.edit.component"
+        <component v-if="partials.edit.active" :active.sync="partials.edit.active" :is="partials.edit.component"
                    :product="partials.edit.product"></component>
     </div>
 </template>
@@ -40,7 +47,7 @@
     import Edit from './InventoryPartials/EditProduct'
 
     export default {
-        name: "Inventory",
+        name: "inventory",
         data() {
             return {
                 products: [],
@@ -49,6 +56,7 @@
                     {text: 'Title', value: 'title', align: 'left'},
                     {text: 'Description', value: 'description', align: 'left', sortable: false},
                     {text: 'Price', value: 'price', align: 'right'},
+                    {text: 'Gross Stock', value: 'stock', align: 'right'},
                     {text: 'Edit', value: 'edit', align: 'center', sortable: false},
                 ],
                 search: '',
@@ -69,8 +77,13 @@
             this.getProducts()
         },
         methods: {
-            getProducts: _.throttle(function () {
-                this.$axios.get('/api/products', {
+            getProducts: _.throttle(function (byName) {
+                let url = '/api/products'
+                if (byName) {
+                    url += '/' + this.search
+                }
+
+                this.$axios.get(url, {
                     params: {
                         page: this.pagination.pager
                     }
@@ -91,6 +104,11 @@
         watch: {
             'pagination.pager': function () {
                 this.getProducts()
+            },
+            'search': function () {
+                if (this.search.length > 1) {
+                    this.getProducts(true)
+                }
             }
         }
     }
@@ -98,7 +116,7 @@
 
 <style scoped>
     .product--image {
-        width: 24px;
-        height: 24px;
+        width: 25px;
+        height: 25px;
     }
 </style>

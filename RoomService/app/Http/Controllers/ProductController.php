@@ -13,7 +13,16 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with(['productInventories', 'productInventories.distributionCenter'])->paginate(10);
+        $products = Product::with(['productInventories', 'productInventories.distributionCenter', 'costAudits'])->paginate(10);
+
+        foreach ($products as $product){
+            $product->gross_stock = 0;
+
+            foreach ($product->productInventories as $inventory){
+                $product->gross_stock += $inventory->quantity;
+            }
+        }
+
         return ProductResource::collection($products);
     }
 
@@ -24,6 +33,17 @@ class ProductController extends Controller
     {
         $product = $request->isMethod('put')
             ? Product::findOrFail($request->product_id) : new Product();
+
+        $this->validate($request, [
+            'input_img' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($request->hasFile('product_image')) {
+            $image = $request->file('product_image');
+            $name = 'product-'.$product->id.'.'.$image->getClientOriginalExtension();
+            $destination_path = public_path('/product_images');
+            $image->move($destination_path, $name);
+        }
 
         $product->id = $request->input('product_id');
         $product->title = $request->input('title');
@@ -53,5 +73,25 @@ class ProductController extends Controller
         if ($product->delete()) {
             return new ProductResource($product);
         }
+    }
+
+    /**
+     * Display a listing of the resource by name.
+     */
+    public function byName($name)
+    {
+        $products = Product::with(['productInventories', 'productInventories.distributionCenter', 'costAudits'])
+            ->where('title', 'like', '%'.$name.'%')
+            ->paginate(10);
+
+        foreach ($products as $product){
+            $product->gross_stock = 0;
+
+            foreach ($product->productInventories as $inventory){
+                $product->gross_stock += $inventory->quantity;
+            }
+        }
+
+        return ProductResource::collection($products);
     }
 }

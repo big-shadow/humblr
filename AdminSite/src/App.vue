@@ -44,7 +44,7 @@
                 drawer: true,
                 items: [
                     {
-                        icon: 'bubble_chart',
+                        icon: 'dashboard',
                         title: 'Dashboard',
                         href: '/'
                     },
@@ -52,6 +52,11 @@
                         icon: 'view_list',
                         title: 'Inventory',
                         href: '/inventory'
+                    },
+                    {
+                        icon: 'domain',
+                        title: 'Distribution',
+                        href: '/'
                     }
                 ]
             }

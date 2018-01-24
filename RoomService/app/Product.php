@@ -22,4 +22,12 @@ class Product extends Model
     {
         return $this->hasMany('App\ProductInventory');
     }
+
+    /**
+     * Get the cost audits.
+     */
+    public function costAudits()
+    {
+        return $this->hasMany('App\ProductCostAudit');
+    }
 }

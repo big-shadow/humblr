@@ -6,7 +6,7 @@
                 </v-card-media>
                 <v-card-title primary-title>
                     <div>
-                        <h3 class="headline">Room Service Administration</h3>
+                        <h3 class="headline">{{ appName }} Administration</h3>
                         <span class="subheader">Please log-in to continue.</span>
                     </div>
                 </v-card-title>
@@ -34,6 +34,8 @@
     </v-layout>
 </template>
 <script>
+    import {mapGetters} from 'vuex'
+
     export default {
         name: "login",
         data() {
@@ -46,7 +48,7 @@
             login: _.throttle(function () {
                 const data = new FormData()
                 data.append('client_id', 1)
-                data.append('client_secret', 'Fl47ViHMWNz6p9z3g4B5HWNqk41iOjOMyStEII8d')
+                data.append('client_secret', 'OuDqjsoiNageNHHI46XqnyV8rMM1hSrBRZJBQQ1X')
                 data.append('grant_type', 'password')
                 data.append('username', this.username)
                 data.append('password', this.password)
@@ -60,7 +62,12 @@
                     alert('Invalid Credentials.')
                 })
             }, 1000)
-        }
+        },
+        computed: {
+            ...mapGetters([
+                'appName'
+            ])
+        },
     }
 </script>
 <style scoped>

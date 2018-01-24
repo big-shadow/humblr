@@ -17,11 +17,11 @@ class ProductResource extends Resource
         return parent::toArray($request);
     }
 
-    public function with($request)
-    {
-        return [
-            'version' => '1.0.0',
-            'inventory' => $this->productInventories
-        ];
-    }
+//    public function with($request)
+//    {
+//        return [
+//            'version' => '1.0.0',
+//            'inventory' => $this->productInventories
+//        ];
+//    }
 }
