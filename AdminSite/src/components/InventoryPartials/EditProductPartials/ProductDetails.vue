@@ -4,14 +4,13 @@
             <span class="headline">Product Details</span>
         </v-card-title>
         <v-card-text>
-
             <v-layout row wrap>
                 <v-flex md12>
                     <v-text-field single-line label="Product Title" v-model="lp.title"></v-text-field>
                 </v-flex>
                 <v-flex md12>
                     <file-upload-button title="Browse" :selectedCallback="updateProductImage"></file-upload-button>
-                    <p v-if="lp.product_image && lp.product_image.name" class="caption">{{ lp.product_image.name }}</p>
+                    <span v-if="lp.product_image && lp.product_image.name">{{ lp.product_image.name }}</span>
                 </v-flex>
             </v-layout>
             <v-layout row>
@@ -20,7 +19,7 @@
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn @click.native="" color="primary">Save
+            <v-btn @click.native="updateProduct" color="primary">Save
                 <v-icon dark right>check_circle</v-icon>
             </v-btn>
         </v-card-actions>
@@ -49,7 +48,7 @@
         },
         methods: {
             updateProduct: _.throttle(function () {
-                this.$axios.put('/api/product', {
+                this.$axios.put('/api/productu', {
                     data: this.lp
                 }).then((r) => {
                     console.log(r)

@@ -21,5 +21,5 @@ Route::get('/products', 'ProductController@index');
 Route::get('/product/{id}', 'ProductController@show')->where('id', '[0-9]+');
 Route::get('/products/{name}', 'ProductController@byName')->where('name', '[A-Za-z]+');
 Route::post('/product', 'ProductController@store');
-Route::put('/product', 'ProductController@store');
+Route::put('/productu', 'ProductController@store');
 Route::delete('/product/{id}', 'ProductController@destroy');

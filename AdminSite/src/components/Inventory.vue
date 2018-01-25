@@ -8,7 +8,7 @@
             <v-spacer></v-spacer>
             <v-flex md4>
                 <v-text-field box label="Search" v-model="search" placeholder="Begin Typing!"
-                              append-icon="search" color="yellow lighten-2"></v-text-field>
+                              append-icon="search" color="yellow"></v-text-field>
             </v-flex>
         </v-layout>
         <v-data-table

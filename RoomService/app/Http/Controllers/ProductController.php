@@ -32,7 +32,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = $request->isMethod('put')
-            ? Product::findOrFail($request->product_id) : new Product();
+            ? Product::findOrFail($request->input('id')) : new Product();
 
         $this->validate($request, [
             'input_img' => 'image|mimes:jpeg,png,jpg|max:2048',
@@ -45,14 +45,19 @@ class ProductController extends Controller
             $image->move($destination_path, $name);
         }
 
-        $product->id = $request->input('product_id');
+//        $data = $request->json()->all();
+//        $product->id = $data['id'];
+//        $product->title = $data['title'];
+//        $product->description = $data['description'];
+//        $product->price = $data['price'];
+        $product->id = $request->input('id');
         $product->title = $request->input('title');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
 
-        if ($product->save()) {
-            return new ProductResource($product);
-        }
+//        if ($product->save()) {
+//            return new ProductResource($product);
+//        }
     }
 
     /**

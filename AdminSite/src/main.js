@@ -16,7 +16,7 @@ import File from './packages/file/File'
 
 Vue.use(Vuetify, {
     theme: {
-        primary: '#42b983',
+        primary: '#218c74',//'#42b983',
         secondary: '#424242',
         accent: '#82B1FF',
         error: '#FF5252',
