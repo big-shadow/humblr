@@ -44,7 +44,10 @@
 
     export default {
         name: "product-details",
-        props: ['product', 'active'],
+        props: {
+            product: Object,
+            active: Boolean
+        },
         data() {
             return {
                 lp: {

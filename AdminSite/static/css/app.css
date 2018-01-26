@@ -26,11 +26,6 @@ input, textarea {
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
 }
 
-input[type=file] {
-    position: absolute;
-    left: -99999px;
-}
-
 .search-box > div > input {
     background: transparent;
 }

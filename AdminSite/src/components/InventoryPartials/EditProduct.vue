@@ -4,19 +4,10 @@
             <v-tabs v-model="active_tab" :scrollable="false">
                 <v-tabs-bar color="grey darken-4">
                     <v-tabs-slider v-pre color="yellow"></v-tabs-slider>
-                    <v-tabs-item
-                            v-for="(tab, i) in tabs"
-                            :key="i"
-                            :href="'#tab-' + i"
-                    >
-                        {{ tab.title }}
-                    </v-tabs-item>
+                    <v-tabs-item v-pre key="general" href="#general">General</v-tabs-item>
                     <v-spacer></v-spacer>
                     <v-menu>
-                        <v-tabs-item slot="activator">
-                            More
-                            <v-icon>arrow_drop_down</v-icon>
-                        </v-tabs-item>
+                        <v-tabs-item slot="activator">More<v-icon>arrow_drop_down</v-icon></v-tabs-item>
                         <v-list>
                             <v-list-tile @click="">Delete</v-list-tile>
                         </v-list>
@@ -28,12 +19,8 @@
                     </v-tabs-item>
                 </v-tabs-bar>
                 <v-tabs-items>
-                    <v-tabs-content
-                            v-for="(tab, i) in tabs"
-                            :key="i"
-                            :id="'tab-' + i"
-                    >
-                        <component v-if="active" :is="tab.component" :product.sync="lp"></component>
+                    <v-tabs-content key="general" id="general">
+                        <product-details v-if="active" :product.sync="lp"></product-details>
                     </v-tabs-content>
                 </v-tabs-items>
             </v-tabs>
@@ -46,16 +33,13 @@
 
     export default {
         name: "edit-product",
-        props: ['product', 'active'],
+        props: {
+            product: Object,
+            active: Boolean
+        },
         data() {
             return {
-                tabs: [
-                    {
-                        title: 'General',
-                        component: ProductDetails
-                    }
-                ],
-                active_tab: 'tab-0',
+                active_tab: 'general',
                 /* local product */
                 lp: {}
             }
@@ -72,6 +56,9 @@
             'lp': function () {
                 this.$emit('update:product', this.lp)
             }
+        },
+        components: {
+            ProductDetails
         }
     }
 </script>

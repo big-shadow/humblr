@@ -55,7 +55,7 @@
                 data.append('secret', '')
 
                 this.$axios.post('/oauth/token', data).then((r) => {
-                    this.$auth.setToken(r.data.access_token, r.data.expires_in)
+                    this.$auth.setToken(r.access_token, r.expires_in)
                     this.$router.push('/')
                 }).catch((e) => {
                     console.log(e)
