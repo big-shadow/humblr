@@ -10,6 +10,7 @@ import router from './router'
 import store from './packages/vuex/Vuex'
 
 // Managed packages
+import Configuration from './packages/configuration/Configuration'
 import Axios from './packages/axios/Axios'
 import Auth from './packages/auth/Auth'
 import File from './packages/file/File'
@@ -26,6 +27,7 @@ Vue.use(Vuetify, {
     }
 })
 
+Vue.use(Configuration)
 Vue.use(Auth)
 Vue.use(Axios)
 Vue.use(File)

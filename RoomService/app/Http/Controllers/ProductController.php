@@ -15,10 +15,10 @@ class ProductController extends Controller
     {
         $products = Product::with(['productInventories', 'productInventories.distributionCenter', 'costAudits'])->paginate(10);
 
-        foreach ($products as $product){
+        foreach ($products as $product) {
             $product->gross_stock = 0;
 
-            foreach ($product->productInventories as $inventory){
+            foreach ($product->productInventories as $inventory) {
                 $product->gross_stock += $inventory->quantity;
             }
         }
@@ -31,33 +31,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $id = $request->json('data')['id'];
+
         $product = $request->isMethod('put')
-            ? Product::findOrFail($request->input('id')) : new Product();
+            ? Product::findOrFail($id) : new Product();
 
-        $this->validate($request, [
-            'input_img' => 'image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+        $data = $request->json('data');
+        $product->id = $data['id'];
+        $product->title = $data['title'];
+        $product->description = $data['description'];
+        $product->price = $data['price'];
 
-        if ($request->hasFile('product_image')) {
-            $image = $request->file('product_image');
-            $name = 'product-'.$product->id.'.'.$image->getClientOriginalExtension();
-            $destination_path = public_path('/product_images');
-            $image->move($destination_path, $name);
+        if ($product->save()) {
+            return new ProductResource($product);
         }
-
-//        $data = $request->json()->all();
-//        $product->id = $data['id'];
-//        $product->title = $data['title'];
-//        $product->description = $data['description'];
-//        $product->price = $data['price'];
-        $product->id = $request->input('id');
-        $product->title = $request->input('title');
-        $product->description = $request->input('description');
-        $product->price = $request->input('price');
-
-//        if ($product->save()) {
-//            return new ProductResource($product);
-//        }
     }
 
     /**
@@ -86,17 +73,40 @@ class ProductController extends Controller
     public function byName($name)
     {
         $products = Product::with(['productInventories', 'productInventories.distributionCenter', 'costAudits'])
-            ->where('title', 'like', '%'.$name.'%')
+            ->where('title', 'like', '%' . $name . '%')
             ->paginate(10);
 
-        foreach ($products as $product){
+        foreach ($products as $product) {
             $product->gross_stock = 0;
 
-            foreach ($product->productInventories as $inventory){
+            foreach ($product->productInventories as $inventory) {
                 $product->gross_stock += $inventory->quantity;
             }
         }
 
         return ProductResource::collection($products);
+    }
+
+    public function storeImage(Request $request)
+    {
+        $id = $request->input('id');
+        $product = Product::findOrFail($id);
+
+        $this->validate($request, [
+            'input_img' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($request->hasFile('product_image')) {
+            $image = $request->file('product_image');
+            $name = 'product-' . $id . '.' . $image->getClientOriginalExtension();
+            $destination_path = public_path('/product_images');
+            $image->move($destination_path, $name);
+        }
+
+        $product->image_filename = $name;
+
+        if ($product->save()) {
+            return new ProductResource($product);
+        }
     }
 }

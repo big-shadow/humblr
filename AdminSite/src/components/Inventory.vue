@@ -1,14 +1,14 @@
 <template>
     <div>
         <v-layout row wrap align-center>
-            <v-flex md4 class="px-2">
+            <v-flex md4 class="px-2" v-pre>
                 <h1 class="headline">Inventory</h1>
                 <p class="body-1 grey--text">Update product information, and inventory.</p>
             </v-flex>
             <v-spacer></v-spacer>
             <v-flex md4>
                 <v-text-field box label="Search" v-model="search" placeholder="Begin Typing!"
-                              append-icon="search" color="yellow"></v-text-field>
+                              append-icon="search" color="yellow" class="search-box"></v-text-field>
             </v-flex>
         </v-layout>
         <v-data-table
@@ -20,8 +20,8 @@
         >
             <template slot="items" slot-scope="props">
                 <td class="text-xs-center">
-                    <v-avatar :tile="false">
-                        <img alt="avatar" class="product--image" src="/static/img/product/default.jpg"/>
+                    <v-avatar :tile="false" size="24px" :key="props.item.image_filename">
+                        <img alt="avatar" :src="props.item.image_path"/>
                     </v-avatar>
                 </td>
                 <td>{{ props.item.title }}</td>
@@ -39,7 +39,7 @@
             <v-pagination v-model="pagination.pager" :length="pagination.pages"></v-pagination>
         </div>
         <component v-if="partials.edit.active" :active.sync="partials.edit.active" :is="partials.edit.component"
-                   :product="partials.edit.product"></component>
+                   :product.sync="partials.edit.product"></component>
     </div>
 </template>
 
@@ -52,7 +52,7 @@
             return {
                 products: [],
                 headers: [
-                    {text: 'Image', value: 'image', align: 'center'},
+                    {text: 'Image', value: 'image', align: 'center', sortable: false},
                     {text: 'Title', value: 'title', align: 'left'},
                     {text: 'Description', value: 'description', align: 'left', sortable: false},
                     {text: 'Price', value: 'price', align: 'right'},
@@ -77,7 +77,7 @@
             this.getProducts()
         },
         methods: {
-            getProducts: _.throttle(function (byName) {
+            getProducts: _.debounce(function (byName) {
                 let url = '/api/products'
                 if (byName) {
                     url += '/' + this.search
@@ -88,14 +88,20 @@
                         page: this.pagination.pager
                     }
                 }).then((r) => {
-                    this.products = r.data.data
-                    this.pagination.pages = r.data.meta.last_page
-                    this.pagination.rowsPerPage = r.data.meta.per_page
-                    this.pagination.totalItems = r.data.meta.total
+                    this.products = r.data.map(p => {
+                        if (!p.image_filename) {
+                            p.image_filename = 'default.png'
+                        }
+                        p.image_path = this.$configuration.api_url + 'product_images/' + p.image_filename
+                        return p
+                    })
+                    this.pagination.pages = r.meta.last_page
+                    this.pagination.rowsPerPage = r.meta.per_page
+                    this.pagination.totalItems = r.meta.total
                 }).catch((e) => {
                     console.log(e)
                 })
-            }, 1000),
+            }, 500),
             editProduct(product) {
                 this.partials.edit.product = product
                 this.partials.edit.active = true
@@ -108,15 +114,10 @@
             'search': function () {
                 if (this.search.length > 1) {
                     this.getProducts(true)
+                } else {
+                    this.getProducts()
                 }
             }
         }
     }
 </script>
-
-<style scoped>
-    .product--image {
-        width: 25px;
-        height: 25px;
-    }
-</style>

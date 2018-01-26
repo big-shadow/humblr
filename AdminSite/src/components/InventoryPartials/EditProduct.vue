@@ -3,7 +3,7 @@
         <v-dialog v-model="active" persistent max-width="600px">
             <v-tabs v-model="active_tab" :scrollable="false">
                 <v-tabs-bar color="grey darken-4">
-                    <v-tabs-slider color="yellow"></v-tabs-slider>
+                    <v-tabs-slider v-pre color="yellow"></v-tabs-slider>
                     <v-tabs-item
                             v-for="(tab, i) in tabs"
                             :key="i"
@@ -33,7 +33,7 @@
                             :key="i"
                             :id="'tab-' + i"
                     >
-                        <component v-if="active" :is="tab.component" :product="product"></component>
+                        <component v-if="active" :is="tab.component" :product.sync="lp"></component>
                     </v-tabs-content>
                 </v-tabs-items>
             </v-tabs>
@@ -55,12 +55,22 @@
                         component: ProductDetails
                     }
                 ],
-                active_tab: 'tab-0'
+                active_tab: 'tab-0',
+                /* local product */
+                lp: {}
             }
+        },
+        created() {
+            _.assign(this.lp, this.product)
         },
         methods: {
             deactivate() {
                 this.$emit('update:active', false)
+            }
+        },
+        watch: {
+            'lp': function () {
+                this.$emit('update:product', this.lp)
             }
         }
     }

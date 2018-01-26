@@ -48,7 +48,7 @@
             login: _.throttle(function () {
                 const data = new FormData()
                 data.append('client_id', 1)
-                data.append('client_secret', 'OuDqjsoiNageNHHI46XqnyV8rMM1hSrBRZJBQQ1X')
+                data.append('client_secret', 'HoeVwwxqphkyT4H9CmFR3EGPs74QJo0GlQ6cYLK8')
                 data.append('grant_type', 'password')
                 data.append('username', this.username)
                 data.append('password', this.password)

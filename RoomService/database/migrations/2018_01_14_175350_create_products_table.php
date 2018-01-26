@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('title',128);
             $table->string('description',1024);
             $table->double('price', 10, 2);
+            $table->string('image_filename', 128)->nullable();
         });
     }
 

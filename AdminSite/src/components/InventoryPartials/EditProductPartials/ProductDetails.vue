@@ -1,20 +1,33 @@
 <template>
     <v-card flat>
-        <v-card-title>
+        <v-card-title v-pre>
             <span class="headline">Product Details</span>
         </v-card-title>
         <v-card-text>
             <v-layout row wrap>
-                <v-flex md12>
-                    <v-text-field single-line label="Product Title" v-model="lp.title"></v-text-field>
+                <v-flex d-flex md4>
+                    <v-avatar :tile="false" size="120px" :key="lp.image_filename">
+                        <img alt="avatar" :src="lp.image_path"/>
+                        <v-spacer></v-spacer>
+                    </v-avatar>
                 </v-flex>
-                <v-flex md12>
-                    <file-upload-button title="Browse" :selectedCallback="updateProductImage"></file-upload-button>
-                    <span v-if="lp.product_image && lp.product_image.name">{{ lp.product_image.name }}</span>
+                <v-flex md8>
+                    <v-text-field label="Product Title" v-model="lp.title"></v-text-field>
+                    <v-layout row wrap>
+                        <v-layout column>
+                            <v-text-field label="Price" v-model="lp.price"></v-text-field>
+                        </v-layout>
+                        <v-layout column>
+                            <div class="text-xs-right">
+                                <file-upload-button title="Browse"
+                                                    :selectedCallback="updateProductImage"></file-upload-button>
+                            </div>
+                        </v-layout>
+                    </v-layout>
                 </v-flex>
             </v-layout>
             <v-layout row>
-                <v-text-field box multi-line label="Description" v-model="lp.description"></v-text-field>
+                <v-text-field multi-line label="Description" v-model="lp.description"></v-text-field>
             </v-layout>
         </v-card-text>
         <v-card-actions>
@@ -37,42 +50,52 @@
                 lp: {
                     /* local product */
                     title: '',
-                    product_image: '',
                     description: '',
                     price: 0,
                 }
             }
         },
         created() {
-            this.lp = Object.assign({}, this.product)
+            _.assign(this.lp, this.product)
         },
         methods: {
             updateProduct: _.throttle(function () {
-                this.$axios.put('/api/productu', {
+                this.$axios.put('/api/product', {
                     data: this.lp
-                }).then((r) => {
-                    console.log(r)
-                }).catch((e) => {
+                }).then(r => {
+                    this.$emit('update:product', r)
+                }).catch(e => {
                     console.log(e)
                 })
-            }, 1000),
-            updateProductImage(file) {
+            }, 3000),
+            updateProductImage: _.throttle(function (file) {
+                const config = {
+                    headers: {'content-type': 'multipart/form-data'}
+                }
+                let data = new FormData();
+                data.append('id', this.lp.id);
+                data.append('product_image', file, file.name);
+
                 console.log("name : " + file.name)
                 console.log("size : " + file.size)
                 console.log("type : " + file.type)
                 console.log("date : " + file.lastModified)
-                this.lp.product_image = file
-            }
+
+                this.$axios.post('/api/product/image', data, config).then(r => {
+                    if (r.image_filename) {
+                        this.lp.image_path = this.$configuration.api_url + 'product_images/' + r.image_filename
+                        this.lp.image_filename = r.image_filename
+                    }
+
+                    this.$emit('update:product', this.lp)
+                    this.$forceUpdate()
+                }).catch(e => {
+                    console.log(e)
+                })
+            }, 3000)
         },
         components: {
             FileUploadButton
         }
     }
 </script>
-
-<style scoped>
-    input[type=file] {
-        position: absolute;
-        left: -99999px;
-    }
-</style>
