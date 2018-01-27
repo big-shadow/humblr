@@ -18,7 +18,7 @@ class CreateProductCostAuditsTable extends Migration
             $table->integer('units_purchased');
             $table->double('total_cost');
             $table->double('cost_per_unit');
-            $table->string('supplier_note', 512);
+            $table->string('supplier_note', 512)->nullable();
             $table->timestamps();
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');

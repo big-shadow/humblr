@@ -1,9 +1,10 @@
 <template>
     <div>
         <v-layout row wrap align-center>
-            <v-flex md4 class="px-2" v-pre>
+            <v-flex md8 class="px-2" v-pre>
                 <h1 class="headline">Inventory</h1>
-                <p class="body-1 grey--text">Update product information, and inventory.</p>
+                <p class="body-1 grey--text">Here you can create, update and delete product information, images, and
+                    inventories.</p>
             </v-flex>
             <v-spacer></v-spacer>
             <v-flex md4>
@@ -126,7 +127,7 @@
             },
             'partials.edit.active': function () {
                 if (this.partials.edit.active == false) {
-                    this.$forceUpdate()
+                    this.getProducts()
                 }
             }
         }

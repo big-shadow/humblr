@@ -33,16 +33,18 @@ class DistributionCenterController extends Controller
      */
     public function store(Request $request)
     {
-        $id = $request->json('data')['id'];
-
-        $distributionCenter = $request->isMethod('put')
-            ? DistributionCenter::findOrFail($id) : new DistributionCenter();
-
         $data = $request->json('data');
-        $distributionCenter->id = $data['id'];
-        $distributionCenter->title = $data['title'];
-        $distributionCenter->description = $data['description'];
-        $distributionCenter->price = $data['price'];
+
+        $distributionCenter = null;
+        if (array_key_exists('id', $data) && $request->isMethod('put')) {
+            $distributionCenter = DistributionCenter::findOrFail($data['id']);
+        } else {
+            $distributionCenter = new DistributionCenter();
+        }
+
+        foreach ($data as $key => $value) {
+            $distributionCenter->$key = $value;
+        }
 
         if ($distributionCenter->save()) {
             return new DistributionCenterResource($distributionCenter);

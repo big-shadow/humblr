@@ -37,16 +37,18 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $id = $request->json('data')['id'];
-
-        $product = $request->isMethod('put')
-            ? Product::findOrFail($id) : new Product();
-
         $data = $request->json('data');
-        $product->id = $data['id'];
-        $product->title = $data['title'];
-        $product->description = $data['description'];
-        $product->price = $data['price'];
+
+        $product = null;
+        if (array_key_exists('id', $data) && $request->isMethod('put')) {
+            $product = Product::findOrFail($data['id']);
+        } else {
+            $product = new Product();
+        }
+
+        foreach ($data as $key => $value) {
+            $product->$key = $value;
+        }
 
         if ($product->save()) {
             return new ProductResource($product);
