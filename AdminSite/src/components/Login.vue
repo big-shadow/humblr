@@ -54,10 +54,10 @@
                 data.append('password', this.password)
                 data.append('secret', '')
 
-                this.$axios.post('/oauth/token', data).then((r) => {
+                this.$axios.post('/oauth/token', data).then(r => {
                     this.$auth.setToken(r.access_token, r.expires_in)
                     this.$router.push('/')
-                }).catch((e) => {
+                }).catch(e => {
                     console.log(e)
                     alert('Invalid Credentials.')
                 })

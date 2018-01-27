@@ -40,7 +40,7 @@
                 <v-divider></v-divider>
             </v-layout>
             <v-layout v-if="more" row>
-                <v-text-field multi-line label="Description" v-model="lp.description"></v-text-field>
+                <v-text-field multi-line label="Product Description" v-model="lp.description"></v-text-field>
             </v-layout>
         </v-card-text>
         <v-card-actions>

@@ -7,8 +7,8 @@
             </v-flex>
             <v-spacer></v-spacer>
             <v-flex md4>
-                <v-text-field box label="Search" v-model="search" placeholder="Begin Typing!"
-                              append-icon="search" color="yellow" class="search-box"></v-text-field>
+                <v-text-field box v-model="search" append-icon="search" color="yellow"
+                              class="search-box"></v-text-field>
             </v-flex>
         </v-layout>
         <v-data-table
@@ -92,7 +92,7 @@
                     params: {
                         page: this.pagination.pager
                     }
-                }).then((r) => {
+                }).then(r => {
                     this.products = r.data.map(p => {
                         if (!p.image_filename) {
                             p.image_filename = 'default.png'
@@ -104,7 +104,7 @@
                     this.pagination.rowsPerPage = r.meta.per_page
                     this.pagination.totalItems = r.meta.total
                     this.loading = false
-                }).catch((e) => {
+                }).catch(e => {
                     console.log(e)
                 })
             }, 500),

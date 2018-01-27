@@ -14,24 +14,24 @@
                     :items="distribution_centers"
                     :search-input.sync="search"
                     v-model="distribution_center"
-                    hint="Type the name."
+                    hint="Begin typing the name of the center."
                     persistent-hint
             ></v-select>
-        </v-flex>
-        <v-flex xs3>
-            <v-text-field label="Quantity" v-model="product_inventory.quantity"
-                          :rules="[$rules.required, $rules.number]" :maxlength="12"></v-text-field>
         </v-flex>
         <v-flex xs3>
             <v-text-field label="Gross Cost" v-model="product_cost_audit.total_cost"
                           :rules="[$rules.required, $rules.money]" prefix="$" :maxlength="12"></v-text-field>
         </v-flex>
         <v-flex xs3>
+            <v-text-field label="Quantity (Units)" v-model="product_inventory.quantity"
+                          :rules="[$rules.required, $rules.number]" :maxlength="12"></v-text-field>
+        </v-flex>
+        <v-flex xs3>
             <v-tooltip right :nudge-right="5">
-                <v-text-field label="C.P.U."
+                <v-text-field label="Cost Per-Unit"
                               :value="product_cost_audit.total_cost / product_inventory.quantity | round(2)"
                               disabled prefix="$" slot="activator"></v-text-field>
-                <span>Cost Per-Unit</span>
+                <span>Gross Cost ÷ Quantity</span>
             </v-tooltip>
         </v-flex>
         <v-flex xs2>
@@ -76,7 +76,7 @@
                     url += '/' + this.search
                 }
 
-                this.$axios.get(url).then((r) => {
+                this.$axios.get(url).then(r => {
                     this.distribution_centers = r.data.map(d => {
                         if (d.product_inventories.length > 0) {
                             d.text = d.name + ' (' + d.product_inventories[0].quantity + ' In stock)'
@@ -86,7 +86,7 @@
                         return d
                     })
                     this.loading = false
-                }).catch((e) => {
+                }).catch(e => {
                     console.log(e)
                 })
             }, 500)
