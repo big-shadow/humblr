@@ -119,7 +119,7 @@
                 }
             },
             'partials.edit.active': function () {
-                if (this.partials.edit.active == false){
+                if (this.partials.edit.active == false) {
                     this.$forceUpdate()
                 }
             }

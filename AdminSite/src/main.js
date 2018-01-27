@@ -11,9 +11,11 @@ import store from './packages/vuex/Vuex'
 
 // Managed packages
 import Configuration from './packages/configuration/Configuration'
+import Rules from './packages/rules/Rules'
 import Axios from './packages/axios/Axios'
 import Auth from './packages/auth/Auth'
 import File from './packages/file/File'
+import * as Filters from './packages/filters/Filters'
 
 Vue.use(Vuetify, {
     theme: {
@@ -28,10 +30,12 @@ Vue.use(Vuetify, {
 })
 
 Vue.use(Configuration)
+Vue.use(Rules)
 Vue.use(Auth)
 Vue.use(Axios)
 Vue.use(File)
 Vue.use(Vue2Filters)
+Vue.use(Filters)
 
 Vue.config.productionTip = false
 

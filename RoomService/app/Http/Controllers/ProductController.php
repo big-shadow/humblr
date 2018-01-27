@@ -13,7 +13,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with(['productInventories', 'productInventories.distributionCenter', 'costAudits'])->paginate(10);
+        $products = Product::with(['productInventories' => function ($query) {
+            $query->take(10);
+        }, 'productInventories.distributionCenter' => function ($query) {
+            $query->take(10);
+        }, 'costAudits' => function ($query) {
+            $query->take(10);
+        }])->paginate(10);
 
         foreach ($products as $product) {
             $product->gross_stock = 0;
@@ -72,7 +78,13 @@ class ProductController extends Controller
      */
     public function byName($name)
     {
-        $products = Product::with(['productInventories', 'productInventories.distributionCenter', 'costAudits'])
+        $products = Product::with(['productInventories' => function ($query) {
+            $query->take(10);
+        }, 'productInventories.distributionCenter' => function ($query) {
+            $query->take(10);
+        }, 'costAudits' => function ($query) {
+            $query->take(10);
+        }])
             ->where('title', 'like', '%' . $name . '%')
             ->paginate(10);
 

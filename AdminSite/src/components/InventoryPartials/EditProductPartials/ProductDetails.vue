@@ -15,18 +15,31 @@
                     <v-text-field label="Product Title" v-model="lp.title"></v-text-field>
                     <v-layout row wrap>
                         <v-layout column>
-                            <v-text-field label="Price" v-model="lp.price"></v-text-field>
+                            <v-text-field label="Retail Price" prefix="$" v-model="lp.price"></v-text-field>
                         </v-layout>
                         <v-layout column>
                             <div class="text-xs-right">
-                                <file-upload-button title="Browse"
+                                <file-upload-button title="Upload Photo"
                                                     :selectedCallback="updateProductImage"></file-upload-button>
                             </div>
                         </v-layout>
                     </v-layout>
                 </v-flex>
             </v-layout>
+            <v-divider></v-divider>
             <v-layout row>
+                <add-stock :product.sync="lp"></add-stock>
+            </v-layout>
+            <v-layout row align-center>
+                <v-divider></v-divider>
+                <a @click="more=!more">
+                    <v-icon>arrow_drop_down</v-icon>
+                    <span>Show More</span>
+                    <v-icon>arrow_drop_down</v-icon>
+                </a>
+                <v-divider></v-divider>
+            </v-layout>
+            <v-layout v-if="more" row>
                 <v-text-field multi-line label="Description" v-model="lp.description"></v-text-field>
             </v-layout>
         </v-card-text>
@@ -41,6 +54,7 @@
 
 <script>
     import FileUploadButton from '../FileUploadButton'
+    import AddStock from './AddStock'
 
     export default {
         name: "product-details",
@@ -55,7 +69,8 @@
                     title: '',
                     description: '',
                     price: 0,
-                }
+                },
+                more: false
             }
         },
         created() {
@@ -98,7 +113,8 @@
             }, 3000)
         },
         components: {
-            FileUploadButton
+            FileUploadButton,
+            AddStock
         }
     }
 </script>

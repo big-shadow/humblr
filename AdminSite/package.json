@@ -75,7 +75,7 @@
     "selenium-server": "^3.0.1",
     "semver": "^5.5.0",
     "shelljs": "^0.7.6",
-    "sinon": "^4.2.1",
+    "sinon": "^4.2.2",
     "sinon-chai": "^2.8.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
