@@ -9,7 +9,7 @@
             <v-spacer></v-spacer>
             <v-flex md4>
                 <v-text-field box v-model="search" append-icon="search" color="yellow"
-                              class="search-box"></v-text-field>
+                              class="search-box" @keyup="getProducts"></v-text-field>
             </v-flex>
         </v-layout>
         <v-data-table
@@ -81,11 +81,11 @@
             this.getProducts()
         },
         methods: {
-            getProducts: _.debounce(function (byName) {
+            getProducts: _.debounce(function () {
                 let url = '/api/products'
                 this.loading = true
 
-                if (byName) {
+                if (this.search.length > 1) {
                     url += '/' + this.search
                 }
 
@@ -117,13 +117,6 @@
         watch: {
             'pagination.pager': function () {
                 this.getProducts()
-            },
-            'search': function () {
-                if (this.search.length > 1) {
-                    this.getProducts(true)
-                } else {
-                    this.getProducts()
-                }
             },
             'partials.edit.active': function () {
                 if (this.partials.edit.active == false) {
