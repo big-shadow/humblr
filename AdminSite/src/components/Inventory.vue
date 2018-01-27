@@ -17,6 +17,8 @@
                 v-bind:pagination.sync="pagination"
                 hide-actions
                 class="elevation-1"
+                disable-initial-sort
+                :loading="loading"
         >
             <template slot="items" slot-scope="props">
                 <td class="text-xs-center">
@@ -53,13 +55,14 @@
                 products: [],
                 headers: [
                     {text: 'Image', value: 'image', align: 'center', sortable: false},
-                    {text: 'Title', value: 'title', align: 'left'},
+                    {text: 'Title', value: 'title', align: 'left', sortable: false},
                     {text: 'Description', value: 'description', align: 'left', sortable: false},
-                    {text: 'Price', value: 'price', align: 'right'},
-                    {text: 'Gross Stock', value: 'stock', align: 'right'},
+                    {text: 'Price', value: 'price', align: 'right', sortable: false},
+                    {text: 'Gross Stock', value: 'stock', align: 'right', sortable: false},
                     {text: 'Edit', value: 'edit', align: 'center', sortable: false},
                 ],
                 search: '',
+                loading: false,
                 pagination: {
                     pager: 1,
                     pages: 0
@@ -79,6 +82,8 @@
         methods: {
             getProducts: _.debounce(function (byName) {
                 let url = '/api/products'
+                this.loading = true
+
                 if (byName) {
                     url += '/' + this.search
                 }
@@ -98,6 +103,7 @@
                     this.pagination.pages = r.meta.last_page
                     this.pagination.rowsPerPage = r.meta.per_page
                     this.pagination.totalItems = r.meta.total
+                    this.loading = false
                 }).catch((e) => {
                     console.log(e)
                 })
