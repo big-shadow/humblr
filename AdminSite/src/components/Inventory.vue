@@ -42,6 +42,9 @@
         <div class="text-xs-center pt-2">
             <v-pagination v-model="pagination.pager" :length="pagination.pages"></v-pagination>
         </div>
+        <v-btn fab color="accent" fixed right bottom class="mb-5 mr-2" ripple>
+            <v-icon>add</v-icon>
+        </v-btn>
         <component v-if="partials.edit.active" :active.sync="partials.edit.active" :is="partials.edit.component"
                    :product.sync="partials.edit.product"></component>
     </div>

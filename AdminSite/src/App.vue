@@ -2,10 +2,26 @@
     <v-app dark>
         <template v-if="!$route.meta.public">
             <v-navigation-drawer fixed clipped v-model="drawer" app>
+                <h3 class="ml-3 mt-3">Quick Links</h3>
+                <v-divider></v-divider>
                 <v-list>
-                    <v-list-tile value="true" v-for="(item, i) in items" :key="i" exact>
+                    <v-list-tile v-for="(item, i) in quick_links" :key="i" exact :href="item.href">
                         <v-list-tile-action>
-                            <v-icon v-html="item.icon"></v-icon>
+                            <v-icon color="primary" v-html="item.icon"></v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title class="links">
+                                <router-link :to="item.href">{{item.title}}</router-link>
+                            </v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </v-list>
+                <h3 class="ml-3">Assets</h3>
+                <v-divider></v-divider>
+                <v-list>
+                    <v-list-tile v-for="(item, i) in assets" :key="i" exact :href="item.href">
+                        <v-list-tile-action>
+                            <v-icon color="primary" v-html="item.icon"></v-icon>
                         </v-list-tile-action>
                         <v-list-tile-content>
                             <v-list-tile-title class="links">
@@ -17,7 +33,7 @@
             </v-navigation-drawer>
             <v-toolbar fixed app clipped-left>
                 <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-                <v-toolbar-title v-text="app_name" class="title"></v-toolbar-title>
+                <v-toolbar-title v-text="app_name" class="title site-title"></v-toolbar-title>
             </v-toolbar>
         </template>
         <v-content>
@@ -43,21 +59,23 @@
         data() {
             return {
                 drawer: true,
-                items: [
+                quick_links: [
                     {
                         icon: 'dashboard',
                         title: 'Dashboard',
+                        href: '/'
+                    },
+                ],
+                assets: [
+                    {
+                        icon: 'domain',
+                        title: 'Distribution',
                         href: '/'
                     },
                     {
                         icon: 'view_list',
                         title: 'Inventory',
                         href: '/inventory'
-                    },
-                    {
-                        icon: 'domain',
-                        title: 'Distribution',
-                        href: '/'
                     }
                 ]
             }
