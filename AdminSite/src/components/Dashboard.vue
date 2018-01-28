@@ -1,6 +1,6 @@
 <template>
     <div class="text-xs-center">
-        <h1>{{ appName }} Administrative Dashboard</h1>
+        <h1>{{ app_name }} Administrative Dashboard</h1>
         <div v-pre class="links mt-2">
             <a href="#">Drivers</a>
             <router-link to="/inventory">Inventory</router-link>
@@ -21,7 +21,7 @@
         },
         computed: {
             ...mapGetters([
-                'appName'
+                'app_name'
             ])
         },
     }

@@ -8,8 +8,8 @@
             </v-flex>
             <v-spacer></v-spacer>
             <v-flex md4>
-                <v-text-field box v-model="search" append-icon="search" color="yellow"
-                              class="search-box" @keyup="getProducts"></v-text-field>
+                <v-text-field box v-model="search" append-icon="search" class="search-box"
+                              @keyup="getProducts(1)"></v-text-field>
             </v-flex>
         </v-layout>
         <v-data-table
@@ -30,6 +30,7 @@
                 <td>{{ props.item.title }}</td>
                 <td>{{ props.item.description | truncate(35) }}</td>
                 <td class="text-xs-right">{{ props.item.price | currency }}</td>
+                <td class="text-xs-right">{{ props.item.average_cpu | currency }}</td>
                 <td class="text-xs-right">{{ props.item.gross_stock }}</td>
                 <td class="text-xs-center">
                     <v-btn flat icon color="primary" @click="editProduct(props.item)">
@@ -59,6 +60,7 @@
                     {text: 'Title', value: 'title', align: 'left', sortable: false},
                     {text: 'Description', value: 'description', align: 'left', sortable: false},
                     {text: 'Price', value: 'price', align: 'right', sortable: false},
+                    {text: 'Average C.P.U.', value: 'average_cpu', align: 'right', sortable: false},
                     {text: 'Gross Stock', value: 'stock', align: 'right', sortable: false},
                     {text: 'Edit', value: 'edit', align: 'center', sortable: false},
                 ],
@@ -81,14 +83,14 @@
             this.getProducts()
         },
         methods: {
-            getProducts: _.debounce(function () {
+            getProducts: _.debounce(function (page) {
                 let url = '/api/products'
                 this.loading = true
 
                 if (this.search.length > 1) {
                     url += '/' + this.search
                 }
-
+                this.pagination.pager = page ? page : this.pagination.pager
                 this.$axios.get(url, {
                     params: {
                         page: this.pagination.pager

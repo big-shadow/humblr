@@ -29,3 +29,7 @@ h1, h2, h3, h4, h5, h6 {
 .input-group--text-field-box > div > input {
     background: transparent;
 }
+
+button.primary {
+    background-color: #674172 !important;
+}

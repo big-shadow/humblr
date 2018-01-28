@@ -16,16 +16,17 @@ import Axios from './packages/axios/Axios'
 import Auth from './packages/auth/Auth'
 import File from './packages/file/File'
 import * as Filters from './packages/filters/Filters'
+import * as Partials from './packages/partials/Partials'
 
 Vue.use(Vuetify, {
     theme: {
-        primary: '#218c74',//'#42b983',
+        primary: '#E9D460',
         secondary: '#424242',
-        accent: '#82B1FF',
-        error: '#FF5252',
-        info: '#2196F3',
-        success: '#4CAF50',
-        warning: '#FFC107'
+        accent: '#674172',
+        error: '#C0392B',
+        info: '#446CB3',
+        success: '#1E824C',
+        warning: '#EB9532'
     }
 })
 
@@ -36,6 +37,7 @@ Vue.use(Axios)
 Vue.use(File)
 Vue.use(Vue2Filters)
 Vue.use(Filters)
+Vue.use(Partials)
 
 Vue.config.productionTip = false
 

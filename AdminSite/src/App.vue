@@ -17,7 +17,7 @@
             </v-navigation-drawer>
             <v-toolbar fixed app clipped-left>
                 <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-                <v-toolbar-title v-text="appName" class="title"></v-toolbar-title>
+                <v-toolbar-title v-text="app_name" class="title"></v-toolbar-title>
             </v-toolbar>
         </template>
         <v-content>
@@ -26,9 +26,10 @@
                     <router-view v-cloak></router-view>
                 </v-slide-y-transition>
             </v-container>
+            <messenger></messenger>
         </v-content>
         <v-footer app v-if="!$route.meta.public">
-            <span>{{ appName }} &copy; {{year}}</span>
+            <span>{{ app_name }} &copy; {{year}}</span>
             <v-spacer></v-spacer>
             <a @click="logout">Log Out</a>
         </v-footer>
@@ -64,7 +65,7 @@
         computed: {
             year: () => (new Date()).getFullYear(),
             ...mapGetters([
-                'appName'
+                'app_name'
             ])
         },
         methods: {

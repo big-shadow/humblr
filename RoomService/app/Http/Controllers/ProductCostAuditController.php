@@ -18,7 +18,9 @@ class ProductCostAuditController extends Controller
         if ($product_id == null) {
             $productCostAudits = ProductCostAudit::query()->paginate(10);
         } else {
-            $productCostAudits = ProductCostAudit::query()->where('product_id', '=', $product_id)->paginate(10);
+            $productCostAudits = ProductCostAudit::query()
+                ->where('product_id', '=', $product_id)
+                ->paginate(10);
         }
 
         return ProductCostAuditResource::collection($productCostAudits);
@@ -37,10 +39,7 @@ class ProductCostAuditController extends Controller
         } else {
             $productCostAudit = new ProductCostAudit();
         }
-
-        foreach ($data as $key => $value) {
-            $productCostAudit->$key = $value;
-        }
+        $productCostAudit->fill($data);
 
         if (array_key_exists('total_cost', $data) || array_key_exists('units_purchased', $data)) {
             $productCostAudit->cost_per_unit = round($productCostAudit->total_cost / $productCostAudit->units_purchased, 2);
@@ -70,5 +69,4 @@ class ProductCostAuditController extends Controller
             return new ProductCostAuditResource($productCostAudit);
         }
     }
-
 }

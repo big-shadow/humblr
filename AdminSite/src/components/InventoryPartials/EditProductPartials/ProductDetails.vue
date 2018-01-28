@@ -34,7 +34,7 @@
                 <v-divider></v-divider>
                 <a @click="more=!more">
                     <v-icon>arrow_drop_down</v-icon>
-                    <span>Show More</span>
+                    <span v-html="'Show ' + (more ? 'Less':'More')"></span>
                     <v-icon>arrow_drop_down</v-icon>
                 </a>
                 <v-divider></v-divider>
@@ -46,15 +46,14 @@
         <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn @click.native="updateProduct" color="primary">Save
-                <v-icon dark right>check_circle</v-icon>
+                <v-icon right>check_circle</v-icon>
             </v-btn>
         </v-card-actions>
     </v-card>
 </template>
 
 <script>
-    import FileUploadButton from '../FileUploadButton'
-    import AddStock from './AddStock'
+    import AddStock from './ProductDetailsPartials/AddStock'
 
     export default {
         name: "product-details",
@@ -113,7 +112,6 @@
             }, 3000)
         },
         components: {
-            FileUploadButton,
             AddStock
         }
     }

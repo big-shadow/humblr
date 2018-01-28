@@ -3,7 +3,7 @@
         <v-dialog v-model="active" persistent max-width="600px">
             <v-tabs v-model="active_tab" :scrollable="false">
                 <v-tabs-bar color="grey darken-4">
-                    <v-tabs-slider v-pre color="yellow"></v-tabs-slider>
+                    <v-tabs-slider v-pre color="primary"></v-tabs-slider>
                     <v-tabs-item v-pre key="general" href="#general">General</v-tabs-item>
                     <v-spacer></v-spacer>
                     <v-menu>

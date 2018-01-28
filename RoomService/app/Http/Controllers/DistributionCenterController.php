@@ -41,10 +41,7 @@ class DistributionCenterController extends Controller
         } else {
             $distributionCenter = new DistributionCenter();
         }
-
-        foreach ($data as $key => $value) {
-            $distributionCenter->$key = $value;
-        }
+        $distributionCenter->fill($data);
 
         if ($distributionCenter->save()) {
             return new DistributionCenterResource($distributionCenter);

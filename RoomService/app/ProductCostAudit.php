@@ -12,7 +12,7 @@ class ProductCostAudit extends Model
      * @var array
      */
     protected $fillable = [
-        'units_purchased', 'total_cost', 'cost_per_unit', 'supplier_note'
+        'units_purchased', 'total_cost', 'cost_per_unit', 'supplier_note', 'product_id'
     ];
 
     /**

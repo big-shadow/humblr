@@ -74,7 +74,7 @@
             return {
                 distribution_centers: Array(),
                 distribution_center: Object,
-                distributionCenterRule: (v) => v.id && !isNaN(v.id) || 'Please select a distribution center.',
+                distributionCenterRule: (v) => v && v.id && !isNaN(v.id) || 'Please select a distribution center.',
                 loading: false,
                 valid: false,
                 search: String(),
@@ -103,6 +103,8 @@
                     this.distribution_centers = r.data.map(d => {
                         if (d.product_inventories.length > 0) {
                             d.quantity = d.product_inventories[0].quantity
+                            /* --- in_stock will later determine our HTTP verb --- */
+                            d.in_stock = true
                         } else {
                             d.quantity = 0
                         }
@@ -114,22 +116,41 @@
                 })
             }, 500),
             addStock: _.debounce(function () {
-                if (this.$refs.form.validate()) {
-                    this.$axios.post('/api/product_cost_audit', {
-                        data: {
-                            units_purchased: this.product_inventory.quantity,
-                            total_cost: this.product_cost_audit.total_cost,
-                            supplier_note: this.product_cost_audit.supplier_note,
-                            product_id: this.product.id
-                        }
-                    }).then(r => {
-                        console.log(r)
-                        this.$refs.form.reset()
-                    }).catch(e => {
-                        console.log(e)
-                    })
+                let costAuditPromise = this.$axios.post('/api/product_cost_audit', {
+                    data: {
+                        units_purchased: this.product_inventory.quantity,
+                        total_cost: this.product_cost_audit.total_cost,
+                        supplier_note: this.product_cost_audit.supplier_note,
+                        product_id: this.product.id
+                    }
+                })
+
+                let inventoryPayload = {
+                    data: {
+                        quantity: this.product_inventory.quantity,
+                        distribution_center_id: this.distribution_center.id,
+                        product_id: this.product.id
+                    }
                 }
-            }, 1500),
+
+                let inventoryPromise = null
+                if (this.distribution_center.in_stock) {
+                    inventoryPromise = this.$axios.post('/api/product_inventory', inventoryPayload)
+                } else {
+                    inventoryPromise = this.$axios.put('/api/product_inventory', inventoryPayload)
+                }
+
+                if (this.$refs.form.validate()) {
+                    axios.all([costAuditPromise, inventoryPromise])
+                        .then(axios.spread((inventory, cost_audit) => {
+                            this.$refs.form.reset()
+                            this.$store.dispatch('messenger_broadcast', ['success', 'New inventory was added.'])
+                        }))
+                        .catch(e => {
+                            console.log(e)
+                        })
+                }
+            }, 3000, {leading: true, trailing: false}),
             distributionCenterKeyUp() {
                 if (this.search && this.search.length > 1) {
                     this.getDistributionCenters(true)

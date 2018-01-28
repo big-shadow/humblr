@@ -47,3 +47,13 @@ Route::get('/product_cost_audit/{id}', 'ProductCostAuditController@show')->where
 Route::post('/product_cost_audit', 'ProductCostAuditController@store');
 Route::put('/product_cost_audit', 'ProductCostAuditController@store');
 Route::delete('/product_cost_audit/{id}', 'ProductCostAuditController@destroy')->where('id', '[0-9]+');
+
+/*--- Product Inventory ---*/
+Route::get('/distribution_center/inventories/{distribution_center_id}', 'ProductInventoryController@byCenter')->where('distribution_center_id', '[0-9]+');
+Route::get('/product/inventories', 'ProductInventoryController@index');
+Route::get('/product/inventories/{product_id}', 'ProductInventoryController@index')->where('product_id', '[0-9]+');
+/*--- Product Inventory Singleton/CRUD ---*/
+Route::get('/product_inventory/{id}', 'ProductInventoryController@show')->where('id', '[0-9]+');
+Route::post('/product_inventory', 'ProductInventoryController@store');
+Route::put('/product_inventory', 'ProductInventoryController@store');
+Route::delete('/product_inventory/{id}', 'ProductInventoryController@destroy')->where('id', '[0-9]+');

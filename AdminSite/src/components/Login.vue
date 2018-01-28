@@ -6,7 +6,7 @@
                 </v-card-media>
                 <v-card-title primary-title>
                     <div>
-                        <h3 class="headline">{{ appName }} Administration</h3>
+                        <h3 class="headline">{{ app_name }} Administration</h3>
                         <span class="subheader">Please log-in to continue.</span>
                     </div>
                 </v-card-title>
@@ -48,7 +48,7 @@
             login: _.throttle(function () {
                 const data = new FormData()
                 data.append('client_id', 1)
-                data.append('client_secret', 'aSWFXJDh1LGUoklnMVzAPrRDyZq4nHuIAX0ZrAkC')
+                data.append('client_secret', 'qYqFFooZI41W7aigRczx6gtAQkRCtoKB9DtrlnL0')
                 data.append('grant_type', 'password')
                 data.append('username', this.username)
                 data.append('password', this.password)
@@ -65,7 +65,7 @@
         },
         computed: {
             ...mapGetters([
-                'appName'
+                'app_name'
             ])
         },
     }

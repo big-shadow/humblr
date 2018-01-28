@@ -1,5 +1,5 @@
 <template>
-    <v-btn class="jbtn-file">
+    <v-btn class="upload--button">
         {{ title }}<input type="file" v-on:change="fileSelected">
     </v-btn>
 </template>
@@ -29,13 +29,13 @@
     input[type=file] {
         display: none;
     }
-    .jbtn-file {
+    .upload--button {
         cursor: pointer;
         position: relative;
         overflow: hidden;
     }
 
-    .jbtn-file input[type=file] {
+    .upload--button input[type=file] {
         position: absolute;
         top: 0;
         right: 0;
