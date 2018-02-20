@@ -11,23 +11,27 @@
                     </div>
                 </v-card-title>
                 <v-card-text>
-                    <v-text-field
-                            @keyup.enter="login"
-                            v-model="username"
-                            box
-                            label="E-mail Address"
-                    ></v-text-field>
-                    <v-text-field
-                            @keyup.enter="login"
-                            v-model="password"
-                            box
-                            label="Password"
-                            type="password"
-                    ></v-text-field>
+                    <v-form v-model="valid" ref="form">
+                        <v-text-field
+                                @keyup.enter="login"
+                                v-model="username"
+                                box
+                                label="E-mail Address"
+                                :rules="[$rules.required, $rules.email]"
+                        ></v-text-field>
+                        <v-text-field
+                                @keyup.enter="login"
+                                v-model="password"
+                                box
+                                label="Password"
+                                type="password"
+                                :rules="[$rules.required]"
+                        ></v-text-field>
+                    </v-form>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="primary" @click.native="login">Submit</v-btn>
+                    <v-btn color="primary" @click.native="login" :disabled="!valid">Submit</v-btn>
                 </v-card-actions>
             </v-card>
         </v-flex>
@@ -40,15 +44,19 @@
         name: "login",
         data() {
             return {
-                username: '',
-                password: ''
+                valid: false,
+                username: String(),
+                password: String()
             }
         },
         methods: {
             login: _.throttle(function () {
+                if (!this.$refs.form.validate()) {
+                    return;
+                }
                 const data = new FormData()
                 data.append('client_id', 1)
-                data.append('client_secret', 'qYqFFooZI41W7aigRczx6gtAQkRCtoKB9DtrlnL0')
+                data.append('client_secret', 'lGSBwYkMiw4IDyyp0PUFMvb3c5Gx06wKaHkzCpYs')
                 data.append('grant_type', 'password')
                 data.append('username', this.username)
                 data.append('password', this.password)
@@ -59,7 +67,7 @@
                     this.$router.push('/')
                 }).catch(e => {
                     console.log(e)
-                    alert('Invalid Credentials.')
+                    this.$store.dispatch('messenger_broadcast', ['error', 'Unauthorized.'])
                 })
             }, 1000)
         },

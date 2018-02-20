@@ -18,7 +18,7 @@ class ProductController extends Controller
             $query->take(50);
         }])->paginate(10);
 
-        foreach ($products as $product){
+        foreach ($products as $product) {
             $product->gross_stock = DB::table('product_inventories')
                 ->selectRaw('sum(quantity) as gross_stock')
                 ->where('product_id', $product->id)
@@ -78,22 +78,22 @@ class ProductController extends Controller
      */
     public function byName($name)
     {
-        $products = Product::with(['productInventories' => function ($query) {
-            $query->take(10);
-        }, 'productInventories.distributionCenter' => function ($query) {
-            $query->take(10);
-        }, 'costAudits' => function ($query) {
-            $query->take(10);
+        $products = Product::with(['productInventories.distributionCenter' => function ($query) {
+            $query->take(50);
         }])
             ->where('title', 'like', '%' . $name . '%')
             ->paginate(10);
 
         foreach ($products as $product) {
-            $product->gross_stock = 0;
+            $product->gross_stock = DB::table('product_inventories')
+                ->selectRaw('sum(quantity) as gross_stock')
+                ->where('product_id', $product->id)
+                ->value('gross_stock');
 
-            foreach ($product->productInventories as $inventory) {
-                $product->gross_stock += $inventory->quantity;
-            }
+            $product->average_cpu = DB::table('product_cost_audits')
+                ->selectRaw('sum(cost_per_unit) / count(*) as average_cpu')
+                ->where('product_id', $product->id)
+                ->value('average_cpu');
         }
 
         return ProductResource::collection($products);

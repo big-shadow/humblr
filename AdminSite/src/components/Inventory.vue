@@ -8,7 +8,7 @@
             </v-flex>
             <v-spacer></v-spacer>
             <v-flex md4>
-                <v-text-field box v-model="search" append-icon="search" class="search-box"
+                <v-text-field solo-inverted v-model="search" append-icon="search" class="search-box"
                               @keyup="getProducts(1)"></v-text-field>
             </v-flex>
         </v-layout>
@@ -42,16 +42,23 @@
         <div class="text-xs-center pt-2">
             <v-pagination v-model="pagination.pager" :length="pagination.pages"></v-pagination>
         </div>
-        <v-btn fab color="accent" fixed right bottom class="mb-5 mr-2" ripple>
+        <v-btn fab color="accent" fixed right bottom class="mb-5 mr-2" ripple @click.native="partials.add.active = true">
             <v-icon>add</v-icon>
         </v-btn>
-        <component v-if="partials.edit.active" :active.sync="partials.edit.active" :is="partials.edit.component"
-                   :product.sync="partials.edit.product"></component>
+        <v-dialog v-model="partials.edit.active" persistent max-width="600px">
+            <edit-product v-if="partials.edit.active" :active.sync="partials.edit.active"
+                          :product.sync="partials.edit.product"/>
+        </v-dialog>
+        <v-dialog v-model="partials.add.active" persistent max-width="600px">
+            <add-product v-if="partials.add.active" :active.sync="partials.add.active"
+                         :product.sync="partials.add.product"/>
+        </v-dialog>
     </div>
 </template>
 
 <script>
-    import Edit from './InventoryPartials/EditProduct'
+    import EditProduct from './InventoryPartials/EditProduct'
+    import AddProduct from './InventoryPartials/AddProduct'
 
     export default {
         name: "inventory",
@@ -75,7 +82,10 @@
                 },
                 partials: {
                     edit: {
-                        component: Edit,
+                        product: {},
+                        active: false
+                    },
+                    add: {
                         product: {},
                         active: false
                     }
@@ -124,10 +134,19 @@
                 this.getProducts()
             },
             'partials.edit.active': function () {
-                if (this.partials.edit.active == false) {
+                if (this.partials.edit.active === false) {
+                    this.getProducts()
+                }
+            },
+            'partials.add.active': function () {
+                if (this.partials.add.active === false) {
                     this.getProducts()
                 }
             }
+        },
+        components: {
+            EditProduct,
+            AddProduct
         }
     }
 </script>

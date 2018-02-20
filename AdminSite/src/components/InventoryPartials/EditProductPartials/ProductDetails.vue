@@ -81,6 +81,7 @@
                     data: this.lp
                 }).then(r => {
                     this.$emit('update:product', r)
+                    this.$store.dispatch('messenger_broadcast', ['success', 'Product updated.'])
                 }).catch(e => {
                     console.log(e)
                 })
@@ -106,6 +107,7 @@
 
                     this.$emit('update:product', this.lp)
                     this.$forceUpdate()
+                    this.$store.dispatch('messenger_broadcast', ['success', 'Image was uploaded.'])
                 }).catch(e => {
                     console.log(e)
                 })

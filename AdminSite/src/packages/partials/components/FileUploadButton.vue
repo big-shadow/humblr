@@ -1,5 +1,5 @@
 <template>
-    <v-btn class="upload--button">
+    <v-btn class="upload--button" :disabled="disabled">
         {{ title }}<input type="file" v-on:change="fileSelected">
     </v-btn>
 </template>
@@ -9,7 +9,8 @@
         name: 'file-upload-button',
         props: {
             selectedCallback: Function,
-            title: String
+            title: String(),
+            disabled: false
         },
         methods: {
             fileSelected(e) {

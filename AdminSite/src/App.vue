@@ -1,5 +1,5 @@
 <template>
-    <v-app dark>
+    <v-app dark toolbar>
         <template v-if="!$route.meta.public">
             <v-navigation-drawer fixed clipped v-model="drawer" app>
                 <h3 class="ml-3 mt-3">Quick Links</h3>
@@ -41,10 +41,10 @@
                 <v-slide-y-transition mode="out-in">
                     <router-view v-cloak></router-view>
                 </v-slide-y-transition>
+                <messenger></messenger>
             </v-container>
-            <messenger></messenger>
         </v-content>
-        <v-footer app v-if="!$route.meta.public">
+        <v-footer app v-if="!$route.meta.public" class="px-2">
             <span>{{ app_name }} &copy; {{year}}</span>
             <v-spacer></v-spacer>
             <a @click="logout">Log Out</a>

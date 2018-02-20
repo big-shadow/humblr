@@ -1,31 +1,28 @@
 <template>
-    <v-layout row justify-center>
-        <v-dialog v-model="active" persistent max-width="600px">
-            <v-tabs v-model="active_tab" :scrollable="false">
-                <v-tabs-bar color="grey darken-4">
-                    <v-tabs-slider v-pre color="primary"></v-tabs-slider>
-                    <v-tabs-item v-pre key="general" href="#general">General</v-tabs-item>
-                    <v-spacer></v-spacer>
-                    <v-menu>
-                        <v-tabs-item slot="activator">More<v-icon>arrow_drop_down</v-icon></v-tabs-item>
-                        <v-list>
-                            <v-list-tile @click="">Delete</v-list-tile>
-                        </v-list>
-                    </v-menu>
-                    <v-tabs-item>
-                        <v-btn icon @click.native="deactivate" class="mx-0">
-                            <v-icon class="pt-1">close</v-icon>
-                        </v-btn>
-                    </v-tabs-item>
-                </v-tabs-bar>
-                <v-tabs-items>
-                    <v-tabs-content key="general" id="general">
-                        <product-details v-if="active" :product.sync="lp"></product-details>
-                    </v-tabs-content>
-                </v-tabs-items>
-            </v-tabs>
-        </v-dialog>
-    </v-layout>
+    <v-tabs v-model="active_tab" :scrollable="false" slider-color="primary" color="grey darken-4">
+        <v-tab v-pre key="general" href="#general">General</v-tab>
+        <v-spacer></v-spacer>
+        <v-menu offset-y>
+            <v-btn flat slot="activator">More
+                <v-icon>arrow_drop_down</v-icon>
+            </v-btn>
+            <v-list>
+                <v-list-tile @click="">
+                    <v-list-tile-title>Delete</v-list-tile-title>
+                </v-list-tile>
+            </v-list>
+        </v-menu>
+        <v-tab>
+            <v-btn icon @click.native="deactivate" class="mx-0">
+                <v-icon>close</v-icon>
+            </v-btn>
+        </v-tab>
+        <v-tabs-items>
+            <v-tab-item key="general" id="general">
+                <product-details v-if="active" :product.sync="lp"></product-details>
+            </v-tab-item>
+        </v-tabs-items>
+    </v-tabs>
 </template>
 
 <script>
@@ -50,11 +47,6 @@
         methods: {
             deactivate() {
                 this.$emit('update:active', false)
-            }
-        },
-        watch: {
-            'lp': function () {
-                this.$emit('update:product', this.lp)
             }
         },
         components: {

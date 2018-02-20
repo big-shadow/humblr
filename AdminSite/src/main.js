@@ -30,6 +30,18 @@ Vue.use(Vuetify, {
     }
 })
 
+// Vue.use(Vuetify, {
+//     theme: {
+//         primary: '#121212',
+//         accent: colors.grey.darken3,
+//         secondary:  colors.amber.darken3,
+//         info:  colors.teal.lighten1,
+//         warning:  colors.amber.base,
+//         error:  colors.deepOrange.accent4,
+//         success:  colors.green.accent3
+//     }
+// })
+
 Vue.use(Configuration)
 Vue.use(Rules)
 Vue.use(Auth)
