@@ -17,10 +17,10 @@
                         </v-avatar>
                     </v-flex>
                     <v-flex md8>
-                        <v-text-field label="Product Title" v-model="lp.title"></v-text-field>
+                        <v-text-field label="Product Title" v-model="lp.title" :rules="[$rules.words]"></v-text-field>
                         <v-layout row wrap>
                             <v-layout column>
-                                <v-text-field label="Retail Price" prefix="$" v-model="lp.price"></v-text-field>
+                                <v-text-field label="Retail Price" prefix="$" v-model="lp.price" :rules="[$rules.money]"></v-text-field>
                             </v-layout>
                             <v-layout column>
                                 <div class="text-xs-right">
@@ -33,13 +33,13 @@
                 </v-layout>
                 <v-divider></v-divider>
                 <v-layout row>
-                    <v-text-field multi-line label="Product Description" v-model="lp.description"></v-text-field>
+                    <v-text-field multi-line label="Product Description" v-model="lp.description" :rules="[$rules.words]"></v-text-field>
                 </v-layout>
             </v-form>
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn @click.native="createProduct" color="primary">Save
+            <v-btn @click.native="createProduct" color="primary" :disabled="!valid">Save
                 <v-icon right>check_circle</v-icon>
             </v-btn>
         </v-card-actions>

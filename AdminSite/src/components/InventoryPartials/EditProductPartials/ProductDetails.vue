@@ -1,5 +1,5 @@
 <template>
-    <v-card flat>
+    <v-card flat height="522px" class="product-tab">
         <v-card-title v-pre>
             <span class="headline">Product Details</span>
         </v-card-title>
@@ -43,7 +43,7 @@
                 <v-text-field multi-line label="Product Description" v-model="lp.description"></v-text-field>
             </v-layout>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions align-end>
             <v-spacer></v-spacer>
             <v-btn @click.native="updateProduct" color="primary">Save
                 <v-icon right>check_circle</v-icon>

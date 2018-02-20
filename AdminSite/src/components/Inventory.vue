@@ -67,7 +67,7 @@
                 products: [],
                 headers: [
                     {text: 'Image', value: 'image', align: 'center', sortable: false},
-                    {text: 'Title', value: 'title', align: 'left', sortable: false},
+                    {text: 'Product Title', value: 'title', align: 'left', sortable: false},
                     {text: 'Description', value: 'description', align: 'left', sortable: false},
                     {text: 'Price', value: 'price', align: 'right', sortable: false},
                     {text: 'Average C.P.U.', value: 'average_cpu', align: 'right', sortable: false},

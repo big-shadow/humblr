@@ -1,7 +1,8 @@
 <template>
     <v-tabs v-model="active_tab" :scrollable="false" slider-color="primary" color="grey darken-4">
         <v-tab v-pre key="general" href="#general">General</v-tab>
-        <v-spacer></v-spacer>
+        <v-tab v-pre key="inventory" href="#inventory">Inventory</v-tab>
+        <v-spacer class="px-4 mx-4"></v-spacer>
         <v-menu offset-y>
             <v-btn flat slot="activator">More
                 <v-icon>arrow_drop_down</v-icon>
@@ -19,7 +20,10 @@
         </v-tab>
         <v-tabs-items>
             <v-tab-item key="general" id="general">
-                <product-details v-if="active" :product.sync="lp"></product-details>
+                <product-details v-if="active" :product.sync="lp"/>
+            </v-tab-item>
+            <v-tab-item key="inventory" id="inventory">
+                <product-inventory v-if="active" :product.sync="lp"/>
             </v-tab-item>
         </v-tabs-items>
     </v-tabs>
@@ -27,6 +31,7 @@
 
 <script>
     import ProductDetails from './EditProductPartials/ProductDetails'
+    import ProductInventory from './EditProductPartials/ProductInventory'
 
     export default {
         name: "edit-product",
@@ -50,7 +55,13 @@
             }
         },
         components: {
-            ProductDetails
+            ProductDetails,
+            ProductInventory
         }
     }
 </script>
+<style>
+    .product-tab{
+        overflow-y: auto;
+    }
+</style>
