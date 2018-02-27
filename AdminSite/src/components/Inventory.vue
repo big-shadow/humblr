@@ -13,9 +13,9 @@
             </v-flex>
         </v-layout>
         <v-data-table
-                v-bind:headers="headers"
-                v-bind:items="products"
-                v-bind:pagination.sync="pagination"
+                :headers="headers"
+                :items="products"
+                :pagination.sync="pagination"
                 hide-actions
                 class="elevation-1"
                 disable-initial-sort
@@ -27,10 +27,11 @@
                         <img alt="avatar" :src="props.item.image_path"/>
                     </v-avatar>
                 </td>
-                <td>{{ props.item.title }}</td>
+                <td>{{ props.item.title | truncate(45) }}</td>
                 <td>{{ props.item.description | truncate(35) }}</td>
                 <td class="text-xs-right">{{ props.item.price | currency }}</td>
-                <td class="text-xs-right">{{ props.item.average_cpu | currency }}</td>
+                <td v-if="isNaN(props.item.average_cpu)" class="text-xs-right">{{ props.item.average_cpu }}</td>
+                <td v-else class="text-xs-right">{{ props.item.average_cpu | currency }}</td>
                 <td class="text-xs-right">{{ props.item.gross_stock }}</td>
                 <td class="text-xs-center">
                     <v-btn flat icon color="primary" @click="editProduct(props.item)">
@@ -40,9 +41,10 @@
             </template>
         </v-data-table>
         <div class="text-xs-center pt-2">
-            <v-pagination v-model="pagination.pager" :length="pagination.pages"></v-pagination>
+            <v-pagination v-model="pagination.pager" :length="pagination.pages"/>
         </div>
-        <v-btn fab color="accent" fixed right bottom class="mb-5 mr-2" ripple @click.native="partials.add.active = true">
+        <v-btn fab color="accent" fixed right bottom class="mb-5 mr-2" ripple
+               @click.native="partials.add.active = true">
             <v-icon>add</v-icon>
         </v-btn>
         <v-dialog v-model="partials.edit.active" persistent max-width="600px">
@@ -74,7 +76,7 @@
                     {text: 'Gross Stock', value: 'stock', align: 'right', sortable: false},
                     {text: 'Edit', value: 'edit', align: 'center', sortable: false},
                 ],
-                search: '',
+                search: String(),
                 loading: false,
                 pagination: {
                     pager: 1,

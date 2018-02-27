@@ -103,6 +103,7 @@
                     this.distribution_centers = r.data.map(d => {
                         if (d.product_inventories.length > 0) {
                             d.quantity = d.product_inventories[0].quantity
+                            d.product_inventory_id = d.product_inventories[0].id
                             /* --- in_stock will later determine our HTTP verb --- */
                             d.in_stock = true
                         } else {
@@ -134,10 +135,12 @@
                 }
 
                 let inventoryPromise = null
-                if (this.distribution_center.in_stock) {
-                    inventoryPromise = this.$axios.post('/api/product_inventory', inventoryPayload)
-                } else {
+                if (this.distribution_center.in_stock === true) {
+                    inventoryPayload.data.id = this.distribution_center.product_inventory_id
+                    inventoryPayload.data.quantity = Number(inventoryPayload.data.quantity) + Number(this.distribution_center.quantity)
                     inventoryPromise = this.$axios.put('/api/product_inventory', inventoryPayload)
+                } else {
+                    inventoryPromise = this.$axios.post('/api/product_inventory', inventoryPayload)
                 }
 
                 if (this.$refs.form.validate()) {

@@ -56,7 +56,7 @@
                 }
                 const data = new FormData()
                 data.append('client_id', 1)
-                data.append('client_secret', 'lGSBwYkMiw4IDyyp0PUFMvb3c5Gx06wKaHkzCpYs')
+                data.append('client_secret', 'dv7Nx9qDP1FBOr9Qpw9PDrb1kbOgkavHzZ6lFBfJ')
                 data.append('grant_type', 'password')
                 data.append('username', this.username)
                 data.append('password', this.password)

@@ -11,20 +11,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\User::class, 1)->create();
+        //factory(\App\User::class, 1)->create();
 
         /* -- Relational Stuff --*/
-        $distributionCenters = factory(App\DistributionCenter::class, 'SimpleDistCenter', 2)->create();
+        $distributionCenters = factory(App\DistributionCenter::class, 'SimpleDistCenter', 5)->create();
 
-        factory(\App\ProductInventory::class, 50)->create([
-            'distribution_center_id' => $distributionCenters[0]->id
-        ]);
+//        factory(\App\ProductInventory::class, 50)->create([
+//            'distribution_center_id' => $distributionCenters[0]->id
+//        ]);
 
-        factory(\App\ProductInventory::class, 50)->create([
-            'distribution_center_id' => $distributionCenters[1]->id
-        ]);
+//        factory(\App\ProductInventory::class, 50)->create([
+//            'distribution_center_id' => $distributionCenters[1]->id
+//        ]);
 
-        factory(App\ProductCostAudit::class, 10)->create();
+//        factory(App\ProductCostAudit::class, 10)->create();
+
+        factory(App\Product::class, 'simpleProduct', 50)->create();
 
         $ray = new \App\User();
         $ray->name = 'Ray Winkelman';

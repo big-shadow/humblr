@@ -32,7 +32,7 @@ Route::post('/product/image', 'ProductController@storeImage');
 Route::get('/distribution_centers', 'DistributionCenterController@index');
 Route::get('/distribution_centers/{name}', 'DistributionCenterController@byName')->where('name', '[A-Za-z\s]+');
 Route::get('/distribution_centers/{product_id}', 'DistributionCenterController@index')->where('product_id', '[0-9]+');
-Route::get('/distribution_centers/{product_id}/{name}', 'DistributionCenterController@byName')->where('name', '[A-Za-z\s]+', 'product_id', '[0-9]+');
+Route::get('/distribution_centers/{product_id}/{name}', 'DistributionCenterController@byName')->where('name', '[A-Za-z\s]*', 'product_id', '[0-9]+');
 /*--- Distribution Centers Singleton/CRUD ---*/
 Route::get('/distribution_center/{id}', 'DistributionCenterController@show')->where('id', '[0-9]+');
 Route::post('/distribution_center', 'DistributionCenterController@store');

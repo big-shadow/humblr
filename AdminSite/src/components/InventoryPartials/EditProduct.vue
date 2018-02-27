@@ -1,8 +1,8 @@
 <template>
     <v-tabs v-model="active_tab" :scrollable="false" slider-color="primary" color="grey darken-4">
-        <v-tab v-pre key="general" href="#general">General</v-tab>
-        <v-tab v-pre key="inventory" href="#inventory">Inventory</v-tab>
-        <v-spacer class="px-4 mx-4"></v-spacer>
+        <v-tab v-pre ripple key="general" href="#general">General</v-tab>
+        <v-tab v-pre ripple key="inventory" href="#inventory">Inventory</v-tab>
+        <v-menu style="width:100%;" disabled @click.prevent/>
         <v-menu offset-y>
             <v-btn flat slot="activator">More
                 <v-icon>arrow_drop_down</v-icon>
@@ -60,8 +60,3 @@
         }
     }
 </script>
-<style>
-    .product-tab{
-        overflow-y: auto;
-    }
-</style>

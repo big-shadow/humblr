@@ -20,9 +20,10 @@ class DistributionCenterController extends Controller
                 $query->take(10);
             }])->paginate(10);
         } else {
-            $distributionCenters = DistributionCenter::with(['productInventories' => function ($query) use ($product_id) {
+            $distributionCenters = DistributionCenter::with(['productInventories'])
+            ->whereHas('productInventories', function ($query) use ($product_id) {
                 $query->where('product_id', '=', $product_id);
-            }])->paginate(10);
+            })->paginate(5);
         }
 
         return DistributionCenterResource::collection($distributionCenters);

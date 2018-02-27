@@ -22,12 +22,12 @@ class ProductController extends Controller
             $product->gross_stock = DB::table('product_inventories')
                 ->selectRaw('sum(quantity) as gross_stock')
                 ->where('product_id', $product->id)
-                ->value('gross_stock');
+                ->value('gross_stock') ?? 0;
 
             $product->average_cpu = DB::table('product_cost_audits')
                 ->selectRaw('sum(cost_per_unit) / count(*) as average_cpu')
                 ->where('product_id', $product->id)
-                ->value('average_cpu');
+                ->value('average_cpu') ?? 'N/A';
         }
 
         return ProductResource::collection($products);
@@ -88,12 +88,12 @@ class ProductController extends Controller
             $product->gross_stock = DB::table('product_inventories')
                 ->selectRaw('sum(quantity) as gross_stock')
                 ->where('product_id', $product->id)
-                ->value('gross_stock');
+                ->value('gross_stock') ?? 0;
 
             $product->average_cpu = DB::table('product_cost_audits')
                 ->selectRaw('sum(cost_per_unit) / count(*) as average_cpu')
                 ->where('product_id', $product->id)
-                ->value('average_cpu');
+                ->value('average_cpu') ?? 'N/A';
         }
 
         return ProductResource::collection($products);

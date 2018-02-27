@@ -1,9 +1,9 @@
 <template>
-    <v-card flat height="522px" class="product-tab">
-        <v-card-title v-pre>
+    <v-card flat height="530px" class="product-tab">
+        <v-card-title v-pre primary-title>
             <span class="headline">Product Details</span>
         </v-card-title>
-        <v-card-text>
+        <v-card-text class="card--text">
             <v-layout row wrap>
                 <v-flex d-flex md4>
                     <v-avatar :tile="false" size="120px" :key="lp.image_filename">
@@ -43,7 +43,7 @@
                 <v-text-field multi-line label="Product Description" v-model="lp.description"></v-text-field>
             </v-layout>
         </v-card-text>
-        <v-card-actions align-end>
+        <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn @click.native="updateProduct" color="primary">Save
                 <v-icon right>check_circle</v-icon>
@@ -118,3 +118,10 @@
         }
     }
 </script>
+
+<style scoped>
+    .card--text {
+        height: 404px;
+        overflow-y: auto;
+    }
+</style>
