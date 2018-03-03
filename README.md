@@ -73,3 +73,9 @@ To update the docs run:
 ```
 php artisan api:generate --routePrefix="api/*" --useMiddlewares --actAsUserId=1
 ```
+
+###Subdomaining
+Add the following to `/etc/hosts`
+```
+127.0.1.1 humbler.io,demo.humbler.io
+```
