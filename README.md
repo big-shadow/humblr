@@ -62,5 +62,14 @@ This command will start a development server at http://localhost:8000
 ```
 php artisan serve
 ```
-
 No need for Apache!
+
+###API Docs
+The API docs are manually generated and can be viewed locally at:
+```
+http://localhost:8000/docs/index.html
+```
+To update the docs run:
+```
+php artisan api:generate --routePrefix="api/*" --useMiddlewares --actAsUserId=1
+```

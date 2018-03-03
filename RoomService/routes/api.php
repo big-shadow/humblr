@@ -40,7 +40,6 @@ Route::put('/distribution_center', 'DistributionCenterController@store');
 Route::delete('/distribution_center/{id}', 'DistributionCenterController@destroy')->where('id', '[0-9]+');
 
 /*--- Product Cost Audits ---*/
-Route::get('/product_cost_audits', 'ProductCostAuditController@index');
 Route::get('/product_cost_audits/{product_id}', 'ProductCostAuditController@index')->where('product_id', '[0-9]+');
 /*--- Product Cost Audits Singleton/CRUD ---*/
 Route::get('/product_cost_audit/{id}', 'ProductCostAuditController@show')->where('id', '[0-9]+');

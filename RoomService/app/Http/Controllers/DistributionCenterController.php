@@ -6,10 +6,17 @@ use App\Http\Resources\DistributionCenterResource;
 use App\DistributionCenter;
 use Illuminate\Http\Request;
 
+/**
+ * @resource DistributionCenter
+ *
+ * Where Products are stored and ProductInventory is tallied.
+ */
 class DistributionCenterController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * GET DistributionCenters
+     *
+     * product_id is optional.
      */
     public function index($product_id)
     {
@@ -21,16 +28,16 @@ class DistributionCenterController extends Controller
             }])->paginate(10);
         } else {
             $distributionCenters = DistributionCenter::with(['productInventories'])
-            ->whereHas('productInventories', function ($query) use ($product_id) {
-                $query->where('product_id', '=', $product_id);
-            })->paginate(5);
+                ->whereHas('productInventories', function ($query) use ($product_id) {
+                    $query->where('product_id', '=', $product_id);
+                })->paginate(5);
         }
 
         return DistributionCenterResource::collection($distributionCenters);
     }
 
     /**
-     * Store or update a resource in the database.
+     * POST,PUT DistributionCenter
      */
     public function store(Request $request)
     {
@@ -47,10 +54,11 @@ class DistributionCenterController extends Controller
         if ($distributionCenter->save()) {
             return new DistributionCenterResource($distributionCenter);
         }
+        return null;
     }
 
     /**
-     * Display the specified resource.
+     * GET DistributionCenter
      */
     public function show($id)
     {
@@ -59,7 +67,7 @@ class DistributionCenterController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * DELETE DistributionCenter
      */
     public function destroy($id)
     {
@@ -67,10 +75,11 @@ class DistributionCenterController extends Controller
         if ($distributionCenter->delete()) {
             return new DistributionCenterResource($distributionCenter);
         }
+        return null;
     }
 
     /**
-     * Display a listing of the resource by name.
+     * GET DistributionCenters (Optional: Where ProductID) By Name
      */
     public function byName($product_id, $name)
     {

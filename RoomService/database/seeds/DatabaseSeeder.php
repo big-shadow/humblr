@@ -19,11 +19,11 @@ class DatabaseSeeder extends Seeder
 //        factory(\App\ProductInventory::class, 50)->create([
 //            'distribution_center_id' => $distributionCenters[0]->id
 //        ]);
-
+//
 //        factory(\App\ProductInventory::class, 50)->create([
 //            'distribution_center_id' => $distributionCenters[1]->id
 //        ]);
-
+//
 //        factory(App\ProductCostAudit::class, 10)->create();
 
         factory(App\Product::class, 'simpleProduct', 50)->create();

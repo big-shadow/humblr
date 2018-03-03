@@ -6,10 +6,15 @@ use App\Http\Resources\ProductCostAuditResource;
 use App\ProductCostAudit;
 use Illuminate\Http\Request;
 
+/**
+ * @resource ProductCostAudit
+ *
+ * Intended to trace a single update to the cost of a single certain Product.
+ */
 class ProductCostAuditController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * GET ProductCostAudits Where ProductID
      */
     public function index($product_id)
     {
@@ -27,7 +32,7 @@ class ProductCostAuditController extends Controller
     }
 
     /**
-     * Store or update a resource in the database.
+     * POST, PUT ProductCostAudit
      */
     public function store(Request $request)
     {
@@ -48,10 +53,11 @@ class ProductCostAuditController extends Controller
         if ($productCostAudit->save()) {
             return new ProductCostAuditResource($productCostAudit);
         }
+        return null;
     }
 
     /**
-     * Display the specified resource.
+     * GET ProductCostAudit
      */
     public function show($id)
     {
@@ -60,7 +66,7 @@ class ProductCostAuditController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * DELETE ProductCostAudit
      */
     public function destroy($id)
     {
@@ -68,5 +74,6 @@ class ProductCostAuditController extends Controller
         if ($productCostAudit->delete()) {
             return new ProductCostAuditResource($productCostAudit);
         }
+        return null;
     }
 }

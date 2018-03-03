@@ -6,10 +6,15 @@ use App\Http\Resources\ProductInventoryResource;
 use App\ProductInventory;
 use Illuminate\Http\Request;
 
+/**
+ * @resource ProductInventory
+ *
+ * A one-to-one relationship with DistributionCenter and Product, representing Product available at the given DistributionCenter.
+ */
 class ProductInventoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * GET ProductCostInventories Where ProductID
      */
     public function index($product_id)
     {
@@ -27,7 +32,7 @@ class ProductInventoryController extends Controller
     }
 
     /**
-     * Store or update a resource in the database.
+     * POST,PUT ProductCostInventory
      */
     public function store(Request $request)
     {
@@ -44,10 +49,11 @@ class ProductInventoryController extends Controller
         if ($productInventory->save()) {
             return new ProductInventoryResource($productInventory);
         }
+        return null;
     }
 
     /**
-     * Display the specified resource.
+     * GET ProductCostInventory
      */
     public function show($id)
     {
@@ -56,7 +62,7 @@ class ProductInventoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * DELETE ProductCostInventory
      */
     public function destroy($id)
     {
@@ -64,10 +70,11 @@ class ProductInventoryController extends Controller
         if ($productInventory->delete()) {
             return new ProductInventoryResource($productInventory);
         }
+        return null;
     }
 
     /**
-     * Display a listing of the resource.
+     * GET ProductCostInventories Where DistributionCenterID
      */
     public function byCenter($distribution_center_id)
     {

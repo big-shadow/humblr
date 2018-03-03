@@ -7,10 +7,15 @@ use App\Http\Resources\ProductResource;
 use App\Product;
 use Illuminate\Http\Request;
 
+/**
+ * @resource Product
+ *
+ * The basic Product record at the core of this platform.
+ */
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * GET Products
      */
     public function index()
     {
@@ -20,21 +25,21 @@ class ProductController extends Controller
 
         foreach ($products as $product) {
             $product->gross_stock = DB::table('product_inventories')
-                ->selectRaw('sum(quantity) as gross_stock')
-                ->where('product_id', $product->id)
-                ->value('gross_stock') ?? 0;
+                    ->selectRaw('sum(quantity) as gross_stock')
+                    ->where('product_id', $product->id)
+                    ->value('gross_stock') ?? 0;
 
             $product->average_cpu = DB::table('product_cost_audits')
-                ->selectRaw('sum(cost_per_unit) / count(*) as average_cpu')
-                ->where('product_id', $product->id)
-                ->value('average_cpu') ?? 'N/A';
+                    ->selectRaw('sum(cost_per_unit) / count(*) as average_cpu')
+                    ->where('product_id', $product->id)
+                    ->value('average_cpu') ?? 'N/A';
         }
 
         return ProductResource::collection($products);
     }
 
     /**
-     * Store or update a resource in the database.
+     * POST,PUT Product
      */
     public function store(Request $request)
     {
@@ -51,10 +56,11 @@ class ProductController extends Controller
         if ($product->save()) {
             return new ProductResource($product);
         }
+        return null;
     }
 
     /**
-     * Display the specified resource.
+     * GET Product
      */
     public function show($id)
     {
@@ -63,7 +69,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * DELETE Product
      */
     public function destroy($id)
     {
@@ -71,10 +77,11 @@ class ProductController extends Controller
         if ($product->delete()) {
             return new ProductResource($product);
         }
+        return null;
     }
 
     /**
-     * Display a listing of the resource by name.
+     * GET Products By Name
      */
     public function byName($name)
     {
@@ -86,19 +93,22 @@ class ProductController extends Controller
 
         foreach ($products as $product) {
             $product->gross_stock = DB::table('product_inventories')
-                ->selectRaw('sum(quantity) as gross_stock')
-                ->where('product_id', $product->id)
-                ->value('gross_stock') ?? 0;
+                    ->selectRaw('sum(quantity) as gross_stock')
+                    ->where('product_id', $product->id)
+                    ->value('gross_stock') ?? 0;
 
             $product->average_cpu = DB::table('product_cost_audits')
-                ->selectRaw('sum(cost_per_unit) / count(*) as average_cpu')
-                ->where('product_id', $product->id)
-                ->value('average_cpu') ?? 'N/A';
+                    ->selectRaw('sum(cost_per_unit) / count(*) as average_cpu')
+                    ->where('product_id', $product->id)
+                    ->value('average_cpu') ?? 'N/A';
         }
 
         return ProductResource::collection($products);
     }
 
+    /**
+     * POST Product Image
+     */
     public function storeImage(Request $request)
     {
         $id = $request->input('id');
@@ -120,5 +130,6 @@ class ProductController extends Controller
         if ($product->save()) {
             return new ProductResource($product);
         }
+        return null;
     }
 }
