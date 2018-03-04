@@ -67,7 +67,7 @@ No need for Apache!
 ###API Docs
 The API docs are manually generated and can be viewed locally at:
 ```
-http://localhost:8000/docs/index.html
+http://humbler.localhost:{port}/docs/index.html
 ```
 To update the docs run:
 ```
@@ -75,7 +75,14 @@ php artisan api:generate --routePrefix="api/*" --useMiddlewares --actAsUserId=1
 ```
 
 ###Subdomaining
-Add the following to `/etc/hosts`
+To use a TLD other than `.localhost` add the following to `/etc/hosts`:
 ```
-127.0.1.1 humbler.io,demo.humbler.io
+127.0.0.1 humbler.dev demo.humbler.dev
+```
+
+To match all `.dev` subdomains, you could install `dnsmasq` then: (on Arch Linux)
+
+```
+echo "address=/humbler.dev/127.0.0.1" >> /etc/dnsmasq.conf
+sudo systemctl restart dnsmasq.service
 ```

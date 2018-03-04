@@ -11,6 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::domain('{subdomain}.admin.' . env("APP_DOMAIN"))->group(function () {
+    Route::get('/', function () {
+        return view('admin');
+    });
 });
+
+Route::get('/', function () {
+    return view('home');
+});
+
+Route::get('/register', function () {
+    return view('register');
+});
+
+Route::post('register', [
+    'uses' => 'Auth\RegisterController@create'
+]);
+

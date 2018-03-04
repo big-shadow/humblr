@@ -1,13 +1,7 @@
 html, body {
     background-color: #fff;
     color: #636b6f;
-    font-family: 'Raleway', sans-serif;
     font-weight: 100;
-    height: 100vh;
-    margin: 0;
-}
-.position-ref {
-    position: relative;
 }
 
 .top-right {
@@ -16,15 +10,23 @@ html, body {
     top: 18px;
 }
 
-.content {
+.header {
     text-align: center;
+    padding-top: 4rem;
+    margin-bottom: 4rem;
+    /*background-color: lemonchiffon;*/
+}
+
+.header > hr {
+    margin: 0;
 }
 
 .title {
-    font-size: 84px;
+    font-size: 8rem;
+    padding: 4rem 0;
 }
 
-.links > a {
+.nav-links > a {
     color: #636b6f;
     padding: 0 25px;
     font-size: 12px;
@@ -34,6 +36,16 @@ html, body {
     text-transform: uppercase;
 }
 
-.m-b-md {
-    margin-bottom: 30px;
+.container {
+    width: 100%;
+}
+
+@media (max-width: 960px) {
+    .content {
+        padding: 0 1rem;
+    }
+}
+
+input[type=text], input[type=password], input[type=textarea] {
+    width: 100%;
 }

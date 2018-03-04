@@ -2,19 +2,26 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ env("APP_NAME") }}</title>
+    <title>{{ env("APP_NAME") }} - @yield('title')</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,400,300,600" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet" type="text/css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/skeleton.css">
+    <link rel="stylesheet" href="/css/app.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/img/favicon.png">
 </head>
 <body>
-<div class="position-ref">
+<div class="container">
     @if (Route::has('login'))
         <div class="top-right links">
             @auth
@@ -26,15 +33,20 @@
         </div>
     @endif
 
-    <div class="content">
-        <div class="title m-b-md">
+    <header class="header">
+        <div class="title">
             {{ env("APP_NAME") }}
         </div>
-
-        <div class="links">
+        <hr>
+        <nav class="nav-links">
             <a href="#">About Us</a>
-            <a href="#">Register</a>
-        </div>
+            <a href="{{ url('/register') }}">Register</a>
+        </nav>
+        <hr>
+    </header>
+
+    <div class="content">
+        @yield('content')
     </div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
