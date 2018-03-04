@@ -13,7 +13,7 @@
 
 Route::domain('{subdomain}.admin.' . env("APP_DOMAIN"))->group(function () {
     Route::get('/', function () {
-        return view('admin');
+        return view('admin.config');
     });
 });
 
