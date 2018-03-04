@@ -6,6 +6,7 @@
     @yield('title')
     <!-- CSS -->
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Raleway:200|Lobster" rel=stylesheet type=text/css>
+    <link href=//cdn.materialdesignicons.com/2.1.19/css/materialdesignicons.min.css rel=stylesheet>
     <link href=https://cdn.jsdelivr.net/npm/vuetify@1.0.1/dist/vuetify.min.css rel=stylesheet type=text/css>
     <link href=static/css/app.css rel=stylesheet type=text/css>
     <!-- JS -->
@@ -18,5 +19,5 @@
 <body>
 <div id=app></div>
 <!-- built files will be auto injected -->
-<script type=text/javascript src=/static/js/manifest.14a76fad9b304f57d579.js></script><script type=text/javascript src=/static/js/vendor.a309bb55e5250fb08230.js></script><script type=text/javascript src=/static/js/app.d6ef7f13409c21ed2386.js></script></body>
+<script type=text/javascript src=/static/js/manifest.14a76fad9b304f57d579.js></script><script type=text/javascript src=/static/js/vendor.c079f881b1745d46aa37.js></script><script type=text/javascript src=/static/js/app.2cba01c77cb688a57e26.js></script></body>
 </html>

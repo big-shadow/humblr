@@ -30,6 +30,48 @@
                         </v-list-tile-content>
                     </v-list-tile>
                 </v-list>
+                <h3 class="ml-3">Logistics</h3>
+                <v-divider></v-divider>
+                <v-list>
+                    <v-list-tile v-for="(item, i) in logistics" :key="i" exact :href="item.href">
+                        <v-list-tile-action>
+                            <v-icon color="primary" v-html="item.icon"></v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title class="links">
+                                <router-link :to="item.href">{{item.title}}</router-link>
+                            </v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </v-list>
+                <h3 class="ml-3">Marketing</h3>
+                <v-divider></v-divider>
+                <v-list>
+                    <v-list-tile v-for="(item, i) in marketing" :key="i" exact :href="item.href">
+                        <v-list-tile-action>
+                            <v-icon color="primary" v-html="item.icon"></v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title class="links">
+                                <router-link :to="item.href">{{item.title}}</router-link>
+                            </v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </v-list>
+                <h3 class="ml-3">Accounting</h3>
+                <v-divider></v-divider>
+                <v-list>
+                    <v-list-tile v-for="(item, i) in accounting" :key="i" exact :href="item.href">
+                        <v-list-tile-action>
+                            <v-icon color="primary" v-html="item.icon"></v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title class="links">
+                                <router-link :to="item.href">{{item.title}}</router-link>
+                            </v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </v-list>
             </v-navigation-drawer>
             <v-toolbar fixed app clipped-left>
                 <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
@@ -76,6 +118,37 @@
                         icon: 'view_list',
                         title: 'Inventory',
                         href: '/inventory'
+                    }
+                ],
+                logistics: [
+                    {
+                        icon: 'mdi-store',
+                        title: 'Hives',
+                        href: '/'
+                    },
+                    {
+                        icon: 'mdi-road-variant',
+                        title: 'Drivers',
+                        href: '/'
+                    }
+                ],
+                marketing: [
+                    {
+                        icon: 'mdi-book-open-page-variant',
+                        title: 'Blog',
+                        href: '/'
+                    },
+                    {
+                        icon: 'mdi-contact-mail',
+                        title: 'Newsletter',
+                        href: '/'
+                    }
+                ],
+                accounting: [
+                    {
+                        icon: 'mdi-cart',
+                        title: 'Orders',
+                        href: '/'
                     }
                 ]
             }

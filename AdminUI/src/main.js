@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import Vue2Filters from 'vue2-filters'
+import colors from 'vuetify/es5/util/colors'
 
 // Components
 import App from './App'
@@ -20,27 +21,15 @@ import * as Partials from './packages/partials/Partials'
 
 Vue.use(Vuetify, {
     theme: {
-        primary: '#E9D460',
-        secondary: '#424242',
-        accent: '#674172',
-        error: '#C0392B',
-        info: '#446CB3',
-        success: '#1E824C',
-        warning: '#EB9532'
+        primary: '#B2FF59',
+        accent: '#000000',
+        secondary: colors.cyan.accent1,
+        info: colors.blue.darken3,
+        warning: colors.yellow.darken3,
+        error: colors.red.darken3,
+        success: colors.green.darken3
     }
 })
-
-// Vue.use(Vuetify, {
-//     theme: {
-//         primary: '#121212',
-//         accent: colors.grey.darken3,
-//         secondary:  colors.amber.darken3,
-//         info:  colors.teal.lighten1,
-//         warning:  colors.amber.base,
-//         error:  colors.deepOrange.accent4,
-//         success:  colors.green.accent3
-//     }
-// })
 
 Vue.use(Configuration)
 Vue.use(Rules)

@@ -1,5 +1,6 @@
 composer.phar
-/.idea/
-/vendor/
+.idea/
+vendor/
 /RoomService/public/product_images/product-*
-/API/public/static/
+API/public/static
+AdminUI/src/packages

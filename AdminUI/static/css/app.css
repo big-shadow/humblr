@@ -21,7 +21,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .links > a {
-    color: #42b983;
+    /*color: #42b983;*/
     padding: 0 25px;
     font-size: 12px;
     font-weight: 600;
@@ -39,5 +39,5 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 button.primary {
-    background-color: #674172 !important;
+    background-color: #000000 !important;
 }

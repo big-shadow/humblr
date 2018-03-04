@@ -11,7 +11,7 @@
             <div class="eight columns">
                 <p>Our vision was inspired by the Community Shared Agriculture business model and the Slow Food
                     movement; and
-                    is now executed by our talented technical people &mdash; with a signature toughness.</p>
+                    is executed by our talented technical people &mdash; with a signature toughness.</p>
 
                 <p>Everyone who has helped us &mdash; in any way at all &mdash; was located in Nova Scotia, Canada. We
                     know our community,
