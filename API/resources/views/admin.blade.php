@@ -14,9 +14,9 @@
 
     <!-- Do NOT Delete The Below Comment(s) -->
     @yield('head')
-<link href=/static/css/app.098e6c73f3d9d156323037e44bb344f6.css rel=stylesheet></head>
+<link href=/static/css/app.00d323e7c32718797581fc4a1a1001bf.css rel=stylesheet></head>
 <body>
 <div id=app></div>
 <!-- built files will be auto injected -->
-<script type=text/javascript src=/static/js/manifest.14a76fad9b304f57d579.js></script><script type=text/javascript src=/static/js/vendor.a309bb55e5250fb08230.js></script><script type=text/javascript src=/static/js/app.3243adef5408e831b377.js></script></body>
+<script type=text/javascript src=/static/js/manifest.14a76fad9b304f57d579.js></script><script type=text/javascript src=/static/js/vendor.a309bb55e5250fb08230.js></script><script type=text/javascript src=/static/js/app.d6ef7f13409c21ed2386.js></script></body>
 </html>

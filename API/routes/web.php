@@ -18,7 +18,7 @@ Route::domain('{subdomain}.admin.' . env("APP_DOMAIN"))->group(function () {
 });
 
 Route::get('/', function () {
-    return view('home');
+    return view('home')->with('login');
 });
 
 Route::get('/register', function () {

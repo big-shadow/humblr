@@ -39,7 +39,10 @@
         </div>
         <hr>
         <nav class="nav-links">
-            <a href="#">About Us</a>
+            <a href="/">About Us</a>
+            <a href="/">Marketplace</a>
+            <a href="/">Blog</a>
+            <a href="/">Support</a>
             <a href="{{ url('/register') }}">Register</a>
         </nav>
         <hr>
