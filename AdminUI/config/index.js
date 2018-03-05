@@ -50,11 +50,13 @@ module.exports = function () {
 
         build: {
             // Template for index.html
-            index: path.resolve(__dirname, '../../API/resources/views/'+ process.argv[3]),
+            index: function () {
+              return path.resolve(__dirname, `../../API/resources/views/${process.argv[3]}`)
+            }(),
 
             // Paths
             assetsRoot: path.resolve(__dirname, '../../API/public'),
-            assetsSubDirectory: 'static',
+            assetsSubDirectory: process.argv[2],
             assetsPublicPath: '/',
 
             /**

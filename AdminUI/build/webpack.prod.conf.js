@@ -71,27 +71,14 @@ const webpackConfig = merge(baseWebpackConfig, {
         // you can customize output by editing /index.html
         // see https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
-            filename: function () {
-                if (process.env.NODE_ENV === 'production') {
-                    if (process.argv[2] === 'admin_ui_src') {
-                        return 'admin-ui.html'
-                    }
-                    else if (process.argv[2] === 'ui_src') {
-                        return 'ui.html'
-                    }
-                }
-                return config.build.index
-            }(),
+            filename: config.build.index,
             template: function () {
-                if (process.env.NODE_ENV === 'production') {
-                    if (process.argv[2] === 'admin_ui_src') {
-                        return 'admin-ui.html'
-                    }
-                    else if (process.argv[2] === 'ui_src') {
-                        return 'ui.html'
-                    }
+                if (process.argv[2] === 'admin_ui_src') {
+                    return 'admin-ui.html'
                 }
-                return config.build.index
+                else {
+                    return 'ui.html'
+                }
             }(),
             inject: true,
             minify: {
