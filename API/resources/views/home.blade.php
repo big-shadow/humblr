@@ -44,8 +44,9 @@
                             <li>Cost-per-unit Insight &amp; Cost Analytics</li>
                         </ul>
                     </li>
-                    <li>Deliveries &amp; Drop-off Locations
+                    <li>Logistics
                         <ul>
+                            <li>Deliveries &amp; Drop-off Locations</li>
                             <li>Driver On-boarding &amp; Traceability</li>
                         </ul>
                     </li>

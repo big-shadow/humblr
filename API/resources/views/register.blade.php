@@ -47,6 +47,21 @@
         </div>
     </div>
     <div class="row">
+        <div class="six columns">
+            {{ Form::label('business_phone', 'Business Phone') }}
+            {{ Form::text('business_phone') }}
+        </div>
+        <div class="six columns">
+            {{ Form::label('business_type', 'Business Type') }}
+            {{ Form::select('business_type', [
+                'CSA' => 'CSA Farm',
+                'Restaurant' => 'Restaurant Chain',
+                'Delivery' => 'Delivery Service',
+                'General' => 'General/e-Commerce'
+            ], 'CSA') }}
+        </div>
+    </div>
+    <div class="row">
         {{ Form::submit('Let\'s Go!', ['class' => 'button-primary u-pull-right']) }}
     </div>
     {!! Form::close() !!}

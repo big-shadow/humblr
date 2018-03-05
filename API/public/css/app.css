@@ -50,7 +50,7 @@ html, body {
     }
 }
 
-input[type=text], input[type=password], input[type=textarea] {
+input[type=text], input[type=password], input[type=textarea], select {
     width: 100%;
 }
 
