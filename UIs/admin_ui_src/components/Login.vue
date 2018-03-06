@@ -2,7 +2,7 @@
     <v-layout align-center justify-center>
         <v-flex md6>
             <v-card id="login">
-                <v-card-media src="static/img/city-at-night.jpg" height="200px">
+                <v-card-media src="admin_static/img/city-at-night.jpg" height="200px">
                 </v-card-media>
                 <v-card-title primary-title>
                     <div>

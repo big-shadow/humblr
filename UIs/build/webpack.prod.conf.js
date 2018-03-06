@@ -128,7 +128,14 @@ const webpackConfig = merge(baseWebpackConfig, {
         // copy custom static assets
         new CopyWebpackPlugin([
             {
-                from: path.resolve(__dirname, '../static'),
+                from: function () {
+                    if (process.argv[2] === 'admin_ui_src') {
+                        return path.resolve(__dirname, '../admin_static')
+                    }
+                    else {
+                        return path.resolve(__dirname, '../ui_static')
+                    }
+                }(),
                 to: config.build.assetsSubDirectory,
                 ignore: ['.*']
             }

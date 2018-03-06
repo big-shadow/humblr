@@ -1,4 +1,5 @@
 <template>
+    <h1>{{ $configuration.app_name }}</h1>
     <p>I'm a store page</p>
 </template>
 

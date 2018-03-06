@@ -13,16 +13,12 @@
 
 // This returns the Administrative Vue.js website for business owners.
 Route::domain('{subdomain}.admin.' . env("APP_DOMAIN"))->group(function () {
-    Route::get('/', function () {
-        return view('admin.config');
-    });
+    Route::get('/{page}', 'UI\UIController@adminSite')->where('page', '.*');
 });
 
 // This returns the e-Comm/CMS Vue.js website for end users.
 Route::domain('{subdomain}.' . env("APP_DOMAIN"))->group(function () {
-    Route::get('/', function () {
-        return view('ui.config');
-    });
+    Route::get('/{page}', 'UI\UIController@userSite')->where('page', '.*');
 });
 
 /*
@@ -31,7 +27,7 @@ Route::domain('{subdomain}.' . env("APP_DOMAIN"))->group(function () {
  * The registration URLs are to get business owners signed up for a subdomain.
  */
 Route::get('/', function () {
-    return view('home')->with('login');
+    return view('home');
 });
 
 Route::get('/register', function () {

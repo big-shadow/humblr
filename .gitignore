@@ -2,6 +2,6 @@ composer.phar
 .idea/
 vendor/
 /RoomService/public/product_images/product-*
-API/public/ui_src/
-API/public/admin_ui_src/
+API/public/ui_static/
+API/public/admin_static/
 AdminUI/src/packages

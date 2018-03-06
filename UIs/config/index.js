@@ -56,7 +56,14 @@ module.exports = function () {
 
             // Paths
             assetsRoot: path.resolve(__dirname, '../../API/public'),
-            assetsSubDirectory: process.argv[2],
+            assetsSubDirectory: function () {
+                if (process.argv[2] === 'admin_ui_src') {
+                    return 'admin_static'
+                }
+                else {
+                    return 'ui_static'
+                }
+            }(),
             assetsPublicPath: '/',
 
             /**

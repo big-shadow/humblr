@@ -28,7 +28,8 @@ module.exports = function () {
             alias: {
                 '@': process.env.NODE_ENV === 'production'
                     ? resolve(process.argv[2])
-                    : resolve(process.argv[6])
+                    : resolve(process.argv[6]),
+                'console.log': '//console.log'
             }
         },
         module: {
