@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Vendor;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -41,42 +42,48 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-    }
-
-    /**
      * Create a new user instance after a valid registration.
      *
      * @param  Request $request
      * @return \App\User
      */
-    protected function create(Request $request)
+    protected function registerAdminWithNewVenue(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+        $userData = $request->validate([
+            'name' => 'required|string|alpha|max:128',
+            'email' => 'required|string|email|max:128|unique:users',
+            'password' => 'required|string|between:6,128|confirmed',
         ]);
 
-        //$data = Input::all();
-
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+        $vendorData = $request->validate([
+            'title' => 'required|string|max:128',
+            'subdomain' => 'required|string|max:32|alpha_num|unique:vendors',
+            'type' => 'required|string|max:32|confirmed',
+            'phone' => 'required|string|between:9,14|confirmed',
         ]);
 
-        //return Redirect::to('form')->withInput(Input::except('password'));
+        $vendor = Vendor::create([
+            'title' => $vendorData['title'],
+            'subdomain' => $vendorData['subdomain'],
+            'type' => $vendorData['type'],
+            'phone' => $vendorData['phone']
+        ]);
+
+        $user = User::create([
+            'name' => $userData['name'],
+            'email' => $userData['email'],
+            'password' => bcrypt($userData['password']),
+            'vendor_id' => $vendor->id,
+            'user_role_id' => 1
+        ]);
+
+        return view('admin.config')->with('json', [
+            'siteName' => $vendor->title,
+            'apiUrl' => env('APP_URL'),
+            'clientSecret' => 'ifUXlMBm1kZYy2rwgiXBhV2UywPEp5ck2w2ndP2N',
+            'subdomain' => $vendor->subdomain,
+            'page' => 'Home',
+            'accessToken' => $user->createToken($user->email)->accessToken
+        ]);
     }
 }

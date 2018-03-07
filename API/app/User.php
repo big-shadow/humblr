@@ -5,7 +5,13 @@ namespace App;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
+class UserRole extends Model {
+    protected $fillable = [
+        'role'
+    ];
+}
 /**
  * A basic user class, extended to use Passport for API auth.
  * Author: Ray Winkelman
@@ -31,4 +37,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the product record associated with the product inventory.
+     */
+    public function userRole()
+    {
+        return $this->hasMany('App\UserRole');
+    }
 }
