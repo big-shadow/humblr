@@ -17,14 +17,16 @@ class UIController extends Controller
      *
      * Current URL.
      */
-    public function adminSite($subdomain, $page = null)
+    public function adminSite(Request $request, $subdomain, $page = null)
     {
         return view('admin.config')->with('json', [
             'siteName' => 'Demo Farm',
             'apiUrl' => env('APP_URL'),
             'clientSecret' => env('X_ADMIN_CLIENT_SECRET'),
             'subdomain' => $subdomain,
-            'page' => $page ?? 'Home'
+            'page' => $page ?? 'dashboard',
+            'accessToken' => $request->session()->pull('accessToken'),
+            'expiresIn' => env('X_SESSION_TIMEOUT')
         ]);
     }
 
@@ -40,7 +42,7 @@ class UIController extends Controller
             'apiUrl' => env('APP_URL'),
             'clientSecret' => env('X_USER_CLIENT_SECRET'),
             'subdomain' => $subdomain,
-            'page' => $page ?? 'Home'
+            'page' => $page ?? 'home'
         ]);
     }
 }

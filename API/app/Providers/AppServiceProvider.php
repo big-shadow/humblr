@@ -15,6 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // This is necessary for cross-subdomain sessions.
+        session_set_cookie_params(0, '/', '.' . env('APP_DOMAIN'));
+
         // This line prevents a migration error.
         // SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; max key length is 767 bytes
         Schema::defaultStringLength(191);

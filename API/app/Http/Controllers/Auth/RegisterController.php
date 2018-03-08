@@ -77,20 +77,13 @@ class RegisterController extends Controller
             'role_id' => 1
         ]);
 
-        $token = $user->createToken($user->email);
+        $token = $user->createToken($user->email)->accessToken;
 
-//        return redirect()->action(
-//            'UserController@profile', ['id' => 1]
-//        );
-
-        return redirect()->route('administration', ['subdomain' => $vendor->subdomain])->with('json', [
-            'siteName' => $vendor->title,
-            'apiUrl' => env('APP_URL'),
-            'clientSecret' => env('X_ADMIN_CLIENT_SECRET'),
-            'subdomain' => $vendor->subdomain,
-            'page' => 'Home',
-            'accessToken' => $token->accessToken,
-            'expiresIn' => now()->diffInSeconds(now()->addMinutes(10))
-        ]);
+        return redirect()->action(
+            'UI\UIController@adminSite', [
+                'subdomain' => $vendor->subdomain,
+                'page' => 'welcome'
+            ]
+        )->with('accessToken', $token);
     }
 }
