@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserRole extends Model {
     protected $fillable = [
-        'role'
+        'role',
     ];
 }
 /**
@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role_id', 'vendor_id'
     ];
 
     /**

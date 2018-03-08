@@ -22,7 +22,7 @@ class UIController extends Controller
         return view('admin.config')->with('json', [
             'siteName' => 'Demo Farm',
             'apiUrl' => env('APP_URL'),
-            'clientSecret' => 'ifUXlMBm1kZYy2rwgiXBhV2UywPEp5ck2w2ndP2N',
+            'clientSecret' => env('X_ADMIN_CLIENT_SECRET'),
             'subdomain' => $subdomain,
             'page' => $page ?? 'Home'
         ]);
@@ -38,7 +38,7 @@ class UIController extends Controller
         return view('ui.config')->with('json', [
             'siteName' => 'Demo Farm',
             'apiUrl' => env('APP_URL'),
-            'clientSecret' => 'ifUXlMBm1kZYy2rwgiXBhV2UywPEp5ck2w2ndP2N',
+            'clientSecret' => env('X_USER_CLIENT_SECRET'),
             'subdomain' => $subdomain,
             'page' => $page ?? 'Home'
         ]);

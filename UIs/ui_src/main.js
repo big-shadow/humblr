@@ -8,16 +8,16 @@ import App from './App'
 
 // Wrappers
 import router from './router'
-import store from './packages/vuex/Vuex'
+import store from '../packages/vuex/Vuex'
 
 // Managed packages
-import Configuration from './packages/configuration/Configuration'
-import Rules from './packages/rules/Rules'
-import Axios from './packages/axios/Axios'
-import Auth from './packages/auth/Auth'
-import File from './packages/file/File'
-import * as Filters from './packages/filters/Filters'
-import * as Partials from './packages/partials/Partials'
+import Configuration from '../packages/configuration/Configuration'
+import Rules from '../packages/rules/Rules'
+import Axios from '../packages/axios/Axios'
+import Auth from '../packages/auth/Auth'
+import File from '../packages/file/File'
+import * as Filters from '../packages/filters/Filters'
+import * as Partials from '../packages/partials/Partials'
 
 Vue.use(Vuetify, {
     theme: {

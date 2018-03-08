@@ -49,17 +49,17 @@ class RegisterController extends Controller
      */
     protected function registerAdminWithNewVenue(Request $request)
     {
+        $vendorData = $request->validate([
+            'title' => 'required|string|max:128',
+            'subdomain' => 'required|string|max:32|alpha_num|unique:vendors',
+            'type' => 'required|string|max:32',
+            'phone' => 'required|string|between:9,14',
+        ]);
+
         $userData = $request->validate([
             'name' => 'required|string|alpha|max:128',
             'email' => 'required|string|email|max:128|unique:users',
             'password' => 'required|string|between:6,128|confirmed',
-        ]);
-
-        $vendorData = $request->validate([
-            'title' => 'required|string|max:128',
-            'subdomain' => 'required|string|max:32|alpha_num|unique:vendors',
-            'type' => 'required|string|max:32|confirmed',
-            'phone' => 'required|string|between:9,14|confirmed',
         ]);
 
         $vendor = Vendor::create([
@@ -74,16 +74,23 @@ class RegisterController extends Controller
             'email' => $userData['email'],
             'password' => bcrypt($userData['password']),
             'vendor_id' => $vendor->id,
-            'user_role_id' => 1
+            'role_id' => 1
         ]);
 
-        return view('admin.config')->with('json', [
+        $token = $user->createToken($user->email);
+
+//        return redirect()->action(
+//            'UserController@profile', ['id' => 1]
+//        );
+
+        return redirect()->route('administration', ['subdomain' => $vendor->subdomain])->with('json', [
             'siteName' => $vendor->title,
             'apiUrl' => env('APP_URL'),
-            'clientSecret' => 'ifUXlMBm1kZYy2rwgiXBhV2UywPEp5ck2w2ndP2N',
+            'clientSecret' => env('X_ADMIN_CLIENT_SECRET'),
             'subdomain' => $vendor->subdomain,
             'page' => 'Home',
-            'accessToken' => $user->createToken($user->email)->accessToken
+            'accessToken' => $token->accessToken,
+            'expiresIn' => now()->diffInSeconds(now()->addMinutes(10))
         ]);
     }
 }

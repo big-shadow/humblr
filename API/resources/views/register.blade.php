@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    {!! Form::open(['action' => 'Auth\RegisterController@create', 'class' => 'registration--form']) !!}
+    {!! Form::open(['action' => 'Auth\RegisterController@registerAdminWithNewVenue', 'class' => 'registration--form']) !!}
     <div class="row">
         <div class="six columns">
             {{ Form::label('name', 'Your Name') }}
@@ -38,8 +38,8 @@
     <hr>
     <div class="row">
         <div class="six columns">
-            {{ Form::label('business_name', 'Business Name') }}
-            {{ Form::text('business_name') }}
+            {{ Form::label('title', 'Business Name') }}
+            {{ Form::text('title') }}
         </div>
         <div class="six columns">
             {{ Form::label('subdomain', 'Subdomain (http://subdomain.'.env('APP_DOMAIN').')') }}
@@ -48,12 +48,12 @@
     </div>
     <div class="row">
         <div class="six columns">
-            {{ Form::label('business_phone', 'Business Phone') }}
-            {{ Form::text('business_phone') }}
+            {{ Form::label('phone', 'Business Phone') }}
+            {{ Form::text('phone') }}
         </div>
         <div class="six columns">
-            {{ Form::label('business_type', 'Business Type') }}
-            {{ Form::select('business_type', [
+            {{ Form::label('type', 'Business Type') }}
+            {{ Form::select('type', [
                 'CSA' => 'CSA Farm',
                 'Restaurant' => 'Restaurant Chain',
                 'Delivery' => 'Delivery Service',

@@ -12,13 +12,13 @@
 */
 
 // This returns the Administrative Vue.js website for business owners.
-Route::domain('{subdomain}.admin.' . env("APP_DOMAIN"))->group(function () {
-    Route::get('/{page}', 'UI\UIController@adminSite')->where('page', '.*');
+Route::domain('{subdomain}.administration.' . env("APP_DOMAIN"))->group(function () {
+    Route::get('/{page?}', 'UI\UIController@adminSite')->where('page', '.*')->name('administration');
 });
 
 // This returns the e-Comm/CMS Vue.js website for end users.
 Route::domain('{subdomain}.' . env("APP_DOMAIN"))->group(function () {
-    Route::get('/{page}', 'UI\UIController@userSite')->where('page', '.*');
+    Route::get('/{page?}', 'UI\UIController@userSite')->where('page', '.*');
 });
 
 /*
@@ -34,7 +34,10 @@ Route::get('/register', function () {
     return view('register');
 });
 
+/*
+ * Form consuming web routes with redirects.
+ */
 Route::post('register', [
-    'uses' => 'Auth\RegisterController@create'
+    'uses' => 'Auth\RegisterController@registerAdminWithNewVenue'
 ]);
 

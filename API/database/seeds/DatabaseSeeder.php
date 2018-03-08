@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $vendorAdminUserRole = new \App\UserRole();
-        $vendorAdminUserRole->id = 1;
         $vendorAdminUserRole->role = 'Vendor Admin';
         $vendorAdminUserRole->save();
     }
