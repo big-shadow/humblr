@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // Components
-import Login from '@/components/Login'
-import Dashboard from '@/components/Dashboard'
-import Inventory from '@/components/Inventory'
+import Login from '../components/Login'
+import Dashboard from '../components/Dashboard'
+import Inventory from '../components/Inventory'
 
 Vue.use(Router)
 let r = new Router({

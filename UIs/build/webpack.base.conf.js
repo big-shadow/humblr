@@ -14,10 +14,12 @@ module.exports = function () {
         entry: {
             app: process.env.NODE_ENV === 'production'
                 ? './' + process.argv[2] + '/main.js'
-                : './' + process.argv[6] + '/main.js'
+                : './admin_ui_src/main.js'
         },
         output: {
-            path: config.build.assetsRoot,
+            path: process.env.NODE_ENV === 'production'
+                ? config.build.assetsRoot
+                : config.dev.assetsRoot,
             filename: '[name].js',
             publicPath: process.env.NODE_ENV === 'production'
                 ? config.build.assetsPublicPath
@@ -28,7 +30,7 @@ module.exports = function () {
             alias: {
                 '@': process.env.NODE_ENV === 'production'
                     ? resolve(process.argv[2])
-                    : resolve(process.argv[6]),
+                    : resolve('admin_ui_src'),
                 'console.log': '//console.log'
             }
         },
@@ -41,7 +43,7 @@ module.exports = function () {
                     include: [
                         process.env.NODE_ENV === 'production'
                             ? resolve(process.argv[2])
-                            : resolve(process.argv[6]),
+                            : resolve('admin_ui_src'),
                         resolve('test')
                     ],
                     options: {
