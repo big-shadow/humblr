@@ -12,9 +12,9 @@
 
     <!-- Do NOT Delete The Below Comment(s) -->
     @yield('head')
-<link href=/ui_static/css/app.ee5858c76754571c9ae692a95c00857b.css rel=stylesheet></head>
+<link href=/ui_static/css/app.5558d6dfa05098716189e84e63df68e1.css rel=stylesheet></head>
 <body>
 <div id=app></div>
 <!-- built files will be auto injected -->
-<script type=text/javascript src=/ui_static/js/manifest.7cbc7d677693e2267e48.js></script><script type=text/javascript src=/ui_static/js/vendor.c079f881b1745d46aa37.js></script><script type=text/javascript src=/ui_static/js/app.5001a8f5620e434a07bc.js></script></body>
+<script type=text/javascript src=/ui_static/js/manifest.7cbc7d677693e2267e48.js></script><script type=text/javascript src=/ui_static/js/vendor.c079f881b1745d46aa37.js></script><script type=text/javascript src=/ui_static/js/app.483ee29440fed502e469.js></script></body>
 </html>

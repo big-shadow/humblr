@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Vendor;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Laravel\Passport\Client;
 
 class RegisterController extends Controller
 {
@@ -77,13 +77,24 @@ class RegisterController extends Controller
             'role_id' => 1
         ]);
 
-        $token = $user->createToken($user->email)->accessToken;
+        $client = Client::where('password_client', 1)->first();
+
+        $request->request->add([
+            'grant_type' => 'password',
+            'client_id' => $client->id,
+            'client_secret' => $client->secret,
+            'username' => $user->email,
+            'password' => $user->password,
+            'scope' => null,
+        ]);
+
+        $token = Request::create('oauth/token', 'POST');
 
         return redirect()->action(
             'UI\UIController@adminSite', [
-                'subdomain' => $vendor->subdomain,
+                'vendor' => $vendor->subdomain,
                 'page' => 'welcome'
             ]
-        )->with('accessToken', $token);
+        )->with('access_token', $token);
     }
 }

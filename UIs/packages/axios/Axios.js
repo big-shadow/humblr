@@ -12,7 +12,10 @@ export default function (Vue) {
                 config.params = {}
             }
             config.params.XDEBUG_SESSION_START = "PHPSTORM"
-            console.log('Request:', config)
+
+            if (!Vue.configuration.production) {
+                console.log('Request:', config)
+            }
         }
         return config;
     }, function (error) {

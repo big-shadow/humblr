@@ -5,11 +5,13 @@ import Router from 'vue-router'
 import Login from '../components/Login'
 import Dashboard from '../components/Dashboard'
 import Inventory from '../components/Inventory'
+import Welcome from '../components/Welcome'
 
 Vue.use(Router)
 let r = new Router({
     mode: 'history',
     routes: [
+        {path: '/', redirect: '/dashboard'},
         {
             path: '/login',
             name: 'Login',
@@ -19,8 +21,13 @@ let r = new Router({
             }
         },
         {
-            path: '/',
+            path: '/dashboard',
             name: 'Dashboard',
+            component: Dashboard
+        },
+        {
+            path: '/welcome',
+            name: 'Welcome',
             component: Dashboard
         },
         {
@@ -34,11 +41,11 @@ let r = new Router({
 r.beforeEach((to, from, next) => {
     let authenticated = Vue.auth.isAuthenticated()
 
-    if(to.meta.public && authenticated){
+    if (to.meta.public && authenticated) {
         next({
             path: '/'
         })
-    } else if(!to.meta.public && !authenticated){
+    } else if (!to.meta.public && !authenticated) {
         next({
             path: '/login'
         })

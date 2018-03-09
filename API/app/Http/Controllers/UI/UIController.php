@@ -4,6 +4,8 @@ namespace App\Http\Controllers\UI;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Vendor;
+use Laravel\Passport\Client;
 
 /**
  * @resource UIController
@@ -17,17 +19,27 @@ class UIController extends Controller
      *
      * Current URL.
      */
-    public function adminSite(Request $request, $subdomain, $page = null)
+    public function adminSite(Request $request, Vendor $vendor, $page = null)
     {
-        return view('admin.config')->with('json', [
-            'siteName' => 'Demo Farm',
-            'apiUrl' => env('APP_URL'),
-            'clientSecret' => env('X_ADMIN_CLIENT_SECRET'),
-            'subdomain' => $subdomain,
+        $client = Client::where('password_client', 1)->first();
+
+        $json = [
+            'site_name' => $vendor->title,
+            'api_url' => env('APP_URL'),
+            'client_id' => $client->id,
+            'client_secret' => $client->secret,
+            'subdomain' => $vendor->subdomain,
             'page' => $page ?? 'dashboard',
-            'accessToken' => $request->session()->pull('accessToken'),
-            'expiresIn' => env('X_SESSION_TIMEOUT')
-        ]);
+        ];
+
+        if ($request->session()->has('access_token')) {
+            $json = array_merge($json, [
+                'access_token' => $request->session()->pull('access_token'),
+                'expires_in' => 1800000
+            ]);
+        }
+
+        return view('admin.config')->with('json', $json);
     }
 
     /**
@@ -35,14 +47,17 @@ class UIController extends Controller
      *
      * Current URL.
      */
-    public function userSite($subdomain, $page = null)
+    public function userSite(Vendor $vendor, $page = null)
     {
+        $client = Client::where('password_client', 1)->first();
+
         return view('ui.config')->with('json', [
-            'siteName' => 'Demo Farm',
-            'apiUrl' => env('APP_URL'),
-            'clientSecret' => env('X_USER_CLIENT_SECRET'),
-            'subdomain' => $subdomain,
-            'page' => $page ?? 'home'
+            'site_name' => $vendor->title,
+            'api_url' => env('APP_URL'),
+            'client_id' => $client->id,
+            'client_secret' => $client->secret,
+            'subdomain' => $vendor->subdomain,
+            'page' => $page ?? 'dashboard',
         ]);
     }
 }

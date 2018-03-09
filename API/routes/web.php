@@ -12,12 +12,12 @@
 */
 
 // This returns the Administrative Vue.js website for business owners.
-Route::domain('{subdomain}.administration.' . env("APP_DOMAIN"))->group(function () {
-    Route::get('/{page?}', 'UI\UIController@adminSite')->where('page', '.*')->name('administration');
+Route::domain('{vendor}.administration.' . env("APP_DOMAIN"))->group(function () {
+    Route::get('/{page?}', 'UI\UIController@adminSite')->where('page', '.*');
 });
 
 // This returns the e-Comm/CMS Vue.js website for end users.
-Route::domain('{subdomain}.' . env("APP_DOMAIN"))->group(function () {
+Route::domain('{vendor}.' . env("APP_DOMAIN"))->group(function () {
     Route::get('/{page?}', 'UI\UIController@userSite')->where('page', '.*');
 });
 

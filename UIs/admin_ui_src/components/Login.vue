@@ -55,12 +55,12 @@
                     return;
                 }
                 const data = new FormData()
-                data.append('client_id', 1)
+                data.append('client_id', this.$configuration.client_id)
                 data.append('client_secret', this.$configuration.client_secret)
                 data.append('grant_type', 'password')
                 data.append('username', this.username)
                 data.append('password', this.password)
-                data.append('secret', '')
+                data.append('scope', '')
 
                 this.$axios.post('/oauth/token', data).then(r => {
                     this.$auth.setToken(r.access_token, r.expires_in)
