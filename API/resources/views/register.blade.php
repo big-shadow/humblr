@@ -62,7 +62,13 @@
         </div>
     </div>
     <div class="row">
-        {{ Form::submit('Let\'s Go!', ['class' => 'button-primary u-pull-right']) }}
+        <div class="six columns">
+            {{ Form::label('business_email', 'Newsletter Reply-to Email') }}
+            {{ Form::text('business_email') }}
+        </div>
+    </div>
+    <div class="row u-pull-right">
+        {{ Form::submit('Let\'s Go!', ['class' => 'u-pull-right']) }}
     </div>
     {!! Form::close() !!}
 @endsection

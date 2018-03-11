@@ -4,18 +4,17 @@
 
 @section('content')
     <div class="text--body">
-        <p>{{ env('APP_NAME') }} is a software platform designed to change our regional economies by
-            extension
-            of changing the way we grow, market, &amp; distribute our local food &amp; goods.</p>
+        <h4>About Us</h4>
+        <p>{{ env('APP_NAME') }} is a marketplace designed to change our regional economies by
+            extension of changing the way we grow, market, &amp; distribute our local food &amp; goods.</p>
         <div class="row">
             <div class="eight columns">
                 <p>Our vision was inspired by the Community Shared Agriculture business model and the Slow Food
                     movement; and
                     is executed by our talented technical people &mdash; with a signature toughness.</p>
 
-                <p>Everyone who has helped us &mdash; in any way at all &mdash; was located in Nova Scotia, Canada. We
-                    know our community,
-                    and the power of our unified front in facing our larger, global competitors.</p>
+                <p>Most of our team and infrastructure is located in Nova Scotia, Canada. We know our community, and the
+                    power of our unified front in facing our larger, global competitors.</p>
 
                 <p>We want to unleash this power in every community across the globe.</p>
             </div>
@@ -44,12 +43,12 @@
                             <li>Cost-per-unit Insight &amp; Cost Analytics</li>
                         </ul>
                     </li>
-                    <li>Logistics
-                        <ul>
-                            <li>Deliveries &amp; Drop-off Locations</li>
-                            <li>Driver On-boarding &amp; Traceability</li>
-                        </ul>
-                    </li>
+                </ul>
+            </li>
+            <li>Logistics
+                <ul>
+                    <li>Deliveries &amp; Drop-off Locations</li>
+                    <li>Driver On-boarding &amp; Traceability</li>
                 </ul>
             </li>
             <li>Content Management &amp; Marketing
@@ -61,6 +60,5 @@
             </li>
         </ul>
         <hr>
-        <h2>The Team</h2>
     </div>
 @endsection

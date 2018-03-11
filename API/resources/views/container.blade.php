@@ -40,9 +40,10 @@
         <hr>
         <nav class="nav-links">
             <a href="/">About Us</a>
-            <a href="/">Marketplace</a>
-            <a href="/">Blog</a>
-            <a href="/">Support</a>
+            <a href="{{ url('/marketplace/comingsoon') }}">Marketplace</a>
+            <a href="{{ url('/blog/comingsoon') }}">Blog</a>
+            <a href="{{ url('/support/comingsoon') }}">Support</a>
+            <a href="{{ url('/contribution/comingsoon') }}">Contribute</a>
             <a href="{{ url('/register') }}">Register</a>
         </nav>
         <hr>

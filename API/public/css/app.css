@@ -3,6 +3,7 @@ html, body {
     color: #636b6f;
     font-weight: 100;
 }
+
 .text--body {
     color: #222;
     font-weight: 300;
@@ -61,5 +62,12 @@ input[type=text], input[type=password], input[type=textarea], select {
 
 .error {
     font-weight: 400;
-    color: #EC644B;
+    color: #c0392b;
+}
+.success{
+    font-weight: 400;
+    color: #27ae60;
+}
+.center-text {
+    text-align: center;
 }

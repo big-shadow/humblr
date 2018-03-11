@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Support\Facades\Validator;
+use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,14 @@ class AppServiceProvider extends ServiceProvider
         // SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; max key length is 767 bytes
         Schema::defaultStringLength(191);
         Resource::withoutWrapping();
+
+        Validator::extend('alpha_space', function ($attribute, $value) {
+            return preg_match('/^[\pL\s]+$/u', $value);
+        });
+
+        Validator::extend('phone', function ($attribute, $value) {
+            return preg_match('/^[\d\-\)\(\s]+$/u', $value);
+        });
     }
 
     /**
@@ -31,6 +41,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('mailgun.client', function () {
+            return GuzzleAdapter::createWithConfig([
+                'timeout' => 10.0,
+            ]);
+        });
     }
 }

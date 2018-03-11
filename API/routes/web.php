@@ -34,10 +34,18 @@ Route::get('/register', function () {
     return view('register');
 });
 
+Route::get('/{title}/comingsoon', function ($title) {
+    return view('comingsoon')->with(['title' => $title]);
+});
+
 /*
  * Form consuming web routes with redirects.
  */
 Route::post('register', [
     'uses' => 'Auth\RegisterController@registerAdminWithNewVenue'
+]);
+
+Route::post('registerNewsletterReceipent', [
+    'uses' => 'Auth\RegisterController@registerNewsletterReceipent'
 ]);
 

@@ -21,6 +21,7 @@ class CreateVendorsTable extends Migration
             $table->string('subdomain',32)->unique();
             $table->string('phone',14);
             $table->string('type');
+            $table->string('email', 128)->unique();
             $table->timestamps();
         });
     }

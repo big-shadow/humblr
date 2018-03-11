@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Laravel\Passport\Client;
+use App\Events\NewVendor;
+use Bogardo\Mailgun\Facades\Mailgun;
 
 class RegisterController extends Controller
 {
@@ -45,7 +47,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  Request $request
-     * @return \App\User
+     * @return Request
      */
     protected function registerAdminWithNewVenue(Request $request)
     {
@@ -53,11 +55,12 @@ class RegisterController extends Controller
             'title' => 'required|string|max:128',
             'subdomain' => 'required|string|max:32|alpha_num|unique:vendors',
             'type' => 'required|string|max:32',
-            'phone' => 'required|string|between:9,14',
+            'phone' => 'required|string|between:9,14|phone',
+            'business_email' => 'required|string|email|max:128|unique:vendors,email',
         ]);
 
         $userData = $request->validate([
-            'name' => 'required|string|alpha|max:128',
+            'name' => 'required|string|alpha_space|max:128',
             'email' => 'required|string|email|max:128|unique:users',
             'password' => 'required|string|between:6,128|confirmed',
         ]);
@@ -66,7 +69,8 @@ class RegisterController extends Controller
             'title' => $vendorData['title'],
             'subdomain' => $vendorData['subdomain'],
             'type' => $vendorData['type'],
-            'phone' => $vendorData['phone']
+            'phone' => $vendorData['phone'],
+            'email' => $vendorData['business_email']
         ]);
 
         $user = User::create([
@@ -76,6 +80,8 @@ class RegisterController extends Controller
             'vendor_id' => $vendor->id,
             'role_id' => 1
         ]);
+
+        event(new NewVendor($vendor, $user));
 
         $client = Client::where('password_client', 1)->first();
 
@@ -96,5 +102,33 @@ class RegisterController extends Controller
                 'page' => 'welcome'
             ]
         )->with('access_token', $token);
+    }
+
+    /**
+     * Add someone to the marketing list.
+     *
+     * @param  Request $request
+     * @return Request
+     */
+    protected function registerNewsletterReceipent(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|alpha_space|max:128',
+            'email' => 'required|string|email|max:128',
+        ]);
+
+        Mailgun::api()->post("lists/" . env('MAILGUN_NEWSLETTER_ALIAS') . "/members", [
+            'address' => $data['email'],
+            'name' => $data['name'],
+            'subscribed' => 'yes',
+            'upsert' => 'yes'
+        ]);
+
+        Mailgun::send('emails.welcome', $data, function ($message) use ($data) {
+            $message->to($data['email'], $data['name'])
+                ->subject('Welcome to ' . env('APP_NAME') . ', ' . $data['name'] . '.');
+        });
+
+        return back()->with('success', $data['email'] . ' was subscribed.');
     }
 }
