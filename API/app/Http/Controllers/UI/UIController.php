@@ -32,10 +32,9 @@ class UIController extends Controller
             'page' => $page ?? 'dashboard',
         ];
 
-        if ($request->session()->has('access_token')) {
+        if ($request->session()->has('session')) {
             $json = array_merge($json, [
-                'access_token' => $request->session()->pull('access_token'),
-                'expires_in' => 1800000
+                'session' => $request->session()->pull('session')
             ]);
         }
 

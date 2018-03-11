@@ -17,8 +17,8 @@ class EmailNewVendorAdmin implements ShouldQueue
     public function handle(NewVendor $event)
     {
         $data = [
-            'name' => $event->user->email,
-            'email' => $event->user->name,
+            'name' => $event->user->name,
+            'email' => $event->user->email,
         ];
 
         Mailgun::send('emails.welcome', $data, function ($message) use ($data) {

@@ -85,23 +85,23 @@ class RegisterController extends Controller
 
         $client = Client::where('password_client', 1)->first();
 
-        $request->request->add([
+        $sessionRequest = Request::create('oauth/token', 'POST', [
             'grant_type' => 'password',
             'client_id' => $client->id,
             'client_secret' => $client->secret,
             'username' => $user->email,
-            'password' => $user->password,
+            'password' => $userData['password'],
             'scope' => null,
         ]);
 
-        $token = Request::create('oauth/token', 'POST');
+        $response = app()->handle($sessionRequest);
 
         return redirect()->action(
             'UI\UIController@adminSite', [
                 'vendor' => $vendor->subdomain,
                 'page' => 'welcome'
             ]
-        )->with('access_token', $token);
+        )->with('session', $response->getContent());
     }
 
     /**

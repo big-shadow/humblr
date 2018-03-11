@@ -9,7 +9,7 @@
         {!! Form::open(['action' => 'Auth\RegisterController@registerNewsletterReceipent', 'class' => 'registration--form']) !!}
         <div class="row">
             <div class="six columns">
-                <p>In the meanwhile, you can sign up for our newsletter, to get updates on our journey.</p>
+                <p>In the meanwhile, you can sign up for our newsletter to get updates on our journey.</p>
                 @if (session('success'))
                     <h6>Hooray!</h6>
                     <div class="success">

@@ -19,5 +19,5 @@
 <body>
 <div id=app></div>
 <!-- built files will be auto injected -->
-<script type=text/javascript src=/admin_static/js/manifest.fac68afc9c41fa456952.js></script><script type=text/javascript src=/admin_static/js/vendor.c079f881b1745d46aa37.js></script><script type=text/javascript src=/admin_static/js/app.3b76e0ccadaee79c5751.js></script></body>
+<script type=text/javascript src=/admin_static/js/manifest.fac68afc9c41fa456952.js></script><script type=text/javascript src=/admin_static/js/vendor.c079f881b1745d46aa37.js></script><script type=text/javascript src=/admin_static/js/app.dd73c10b9b6b117da5fa.js></script></body>
 </html>

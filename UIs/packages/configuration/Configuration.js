@@ -8,7 +8,8 @@ export default function (Vue) {
         app_name: _CONF.site_name,
         request_timeout: Infinity,
         production: false,
-        messenger_timeout: 3000
+        messenger_timeout: 3000,
+        route: _CONF.page
     };
 };
 Object.defineProperties(Vue.prototype, {
