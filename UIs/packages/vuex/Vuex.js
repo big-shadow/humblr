@@ -30,6 +30,9 @@ const store = new Vuex.Store({
         app_name: state => {
             return Vue.configuration.app_name
         },
+        vendor: state => {
+            return Vue.configuration.vendor
+        },
         messenger: state => {
             return state.messenger
         },

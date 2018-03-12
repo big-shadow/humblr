@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Laravel\Passport\Client;
 use App\Events\NewVendor;
 use Bogardo\Mailgun\Facades\Mailgun;
+use Illuminate\Support\Facades\Route;
 
 class RegisterController extends Controller
 {
@@ -94,14 +95,14 @@ class RegisterController extends Controller
             'scope' => null,
         ]);
 
-        $response = app()->handle($sessionRequest);
+        $sessionResponse = Route::dispatch($sessionRequest);
 
         return redirect()->action(
             'UI\UIController@adminSite', [
                 'vendor' => $vendor->subdomain,
                 'page' => 'welcome'
             ]
-        )->with('session', $response->getContent());
+        )->with('session', $sessionResponse);
     }
 
     /**

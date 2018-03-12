@@ -1,12 +1,14 @@
 html, body {
+    height: 100%;
+    overflow-y: auto;
     background-color: #fff;
-    color: #636b6f;
-    font-weight: 100;
-}
-
-.text--body {
     color: #222;
     font-weight: 300;
+}
+
+body {
+    background: url('/img/rucola.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
 .top-right {
@@ -17,22 +19,42 @@ html, body {
 
 .header {
     text-align: center;
-    padding-top: 4rem;
-    margin-bottom: 4rem;
-    /*background-color: lemonchiffon;*/
+    margin-bottom: 6rem;
 }
 
 .header > hr {
     margin: 0;
 }
 
+.header > .title {
+    color: #fff;
+}
+
 .title {
+    background: url('/img/farmersmarket-20.jpg') no-repeat center center;
+    padding: 4rem;
+}
+
+.title > h1 {
     font-size: 8rem;
-    padding: 4rem 0;
+    font-weight: 600;
+    text-shadow: 0 0 50px black;
+    margin-bottom: 0;
+}
+
+.title > span {
+    font-size: 2rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 10px black;
+}
+
+.nav-links {
+    background-color: black;
 }
 
 .nav-links > a {
-    color: #636b6f;
+    /*color: #636b6f;*/
+    color: #fff;
     padding: 0 25px;
     font-size: 12px;
     font-weight: 600;
@@ -42,7 +64,11 @@ html, body {
 }
 
 .container {
-    width: 100%;
+    background-color: #fff;
+}
+
+.content {
+    padding: 0 4rem;
 }
 
 @media (max-width: 960px) {
@@ -55,7 +81,7 @@ input[type=text], input[type=password], input[type=textarea], select {
     width: 100%;
 }
 
-.responsive-image {
+img.responsive-image {
     height: auto;
     width: 100%;
 }
@@ -64,10 +90,12 @@ input[type=text], input[type=password], input[type=textarea], select {
     font-weight: 400;
     color: #c0392b;
 }
-.success{
+
+.success {
     font-weight: 400;
     color: #27ae60;
 }
+
 .center-text {
     text-align: center;
 }

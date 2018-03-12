@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Lobster', cursive;
 }
 
-.links > a {
+.links > a, .links > span {
     /*color: #42b983;*/
     padding: 0 25px;
     font-size: 12px;

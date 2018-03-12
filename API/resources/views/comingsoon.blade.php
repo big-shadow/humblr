@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="text--body">
-        <h5 class="center-text">The <b>{{ $title }}</b> feature is <b>coming soon</b>.</h5>
+        <h5 class="center-text">The {{ $title }} feature is coming soon.</h5>
         <hr>
         {!! Form::open(['action' => 'Auth\RegisterController@registerNewsletterReceipent', 'class' => 'registration--form']) !!}
         <div class="row">

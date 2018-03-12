@@ -41,13 +41,6 @@ let r = new Router({
 r.beforeEach((to, from, next) => {
     let authenticated = Vue.auth.isAuthenticated()
 
-    // if (Vue.configuration.route && authenticated) {
-    //     let route = Vue.configuration.route
-    //     Vue.configuration.route = null
-    //     next({
-    //         path: '/' + route
-    //     })
-    // } else
     if (to.meta.public && authenticated) {
         next({
             path: '/dashboard'

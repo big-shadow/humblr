@@ -24,12 +24,12 @@ class UIController extends Controller
         $client = Client::where('password_client', 1)->first();
 
         $json = [
-            'site_name' => $vendor->title,
+            'app_name' => env('APP_NAME'),
             'api_url' => env('APP_URL'),
             'client_id' => $client->id,
             'client_secret' => $client->secret,
-            'subdomain' => $vendor->subdomain,
             'page' => $page ?? 'dashboard',
+            'vendor' => $vendor->toJson()
         ];
 
         if ($request->session()->has('session')) {
@@ -51,7 +51,7 @@ class UIController extends Controller
         $client = Client::where('password_client', 1)->first();
 
         return view('ui.config')->with('json', [
-            'site_name' => $vendor->title,
+            'app_name' => env('APP_NAME'),
             'api_url' => env('APP_URL'),
             'client_id' => $client->id,
             'client_secret' => $client->secret,

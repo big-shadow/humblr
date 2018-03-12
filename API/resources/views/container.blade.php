@@ -10,7 +10,7 @@
     <title>{{ env("APP_NAME") }} - @yield('title')</title>
 
     <!-- Fonts -->
-    <link href="//fonts.googleapis.com/css?family=Raleway:100,400,300,600" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,200,300,400,600" rel="stylesheet" type="text/css">
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/normalize.css">
@@ -35,9 +35,9 @@
 
     <header class="header">
         <div class="title">
-            {{ env("APP_NAME") }}
+            <h1>{{ env("APP_NAME") }}</h1>
+            <span>Grow. Market. Distribute.</span>
         </div>
-        <hr>
         <nav class="nav-links">
             <a href="/">About Us</a>
             <a href="{{ url('/marketplace/comingsoon') }}">Marketplace</a>
@@ -46,23 +46,11 @@
             <a href="{{ url('/contribution/comingsoon') }}">Contribute</a>
             <a href="{{ url('/register') }}">Register</a>
         </nav>
-        <hr>
     </header>
 
     <div class="content">
         @yield('content')
     </div>
 </div>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-    // axios.get('/oauth/scopes')
-    //     .then(response => {
-    //         console.log(response.data);
-    //     });
-    // axios.get('/oauth/clients')
-    //     .then(response => {
-    //         console.log(response.data);
-    //     });
-</script>
 </body>
 </html>

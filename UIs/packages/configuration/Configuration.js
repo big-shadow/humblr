@@ -5,11 +5,11 @@ export default function (Vue) {
         client_secret: _CONF.client_secret,
         client_id: _CONF.client_id,
         api_url: _CONF.api_url,
-        app_name: _CONF.site_name,
+        vendor: _CONF.vendor,
+        app_name: _CONF.app_name,
         request_timeout: Infinity,
         production: false,
-        messenger_timeout: 3000,
-        route: _CONF.page
+        messenger_timeout: 3000
     };
 };
 Object.defineProperties(Vue.prototype, {
