@@ -8,7 +8,7 @@ export default function (Vue) {
         vendor: _CONF.vendor,
         app_name: _CONF.app_name,
         request_timeout: Infinity,
-        production: false,
+        production: true,
         messenger_timeout: 3000
     };
 };
