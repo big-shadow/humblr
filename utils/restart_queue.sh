@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ../API/
+cd httpdocs/humblr.market/API
 
 if pgrep "artisan" > /dev/null
 then
