@@ -41,6 +41,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind('MailerInterface', 'MailgunWrapper');
+
         $this->app->bind('mailgun.client', function () {
             return GuzzleAdapter::createWithConfig([
                 'timeout' => 10.0,

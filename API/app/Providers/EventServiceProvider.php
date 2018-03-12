@@ -14,9 +14,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Events\NewVendor' => [
-            'App\Listeners\QueueNewMailgunList',
-            'App\Listeners\AddNewVendorAdminToMarketingList',
-            'App\Listeners\EmailNewVendorAdmin',
+            'App\Listeners\NewVendorJobs'
         ],
     ];
 

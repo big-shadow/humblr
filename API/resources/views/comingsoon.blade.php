@@ -17,6 +17,15 @@
                             <li>{{ session('success') }}</li>
                         </ul>
                     </div>
+                @elseif ($errors->any())
+                    <h6>Oops...</h6>
+                    <div class="error">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
             </div>
             <div class="six columns">

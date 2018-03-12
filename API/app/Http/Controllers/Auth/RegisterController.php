@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Laravel\Passport\Client;
 use App\Events\NewVendor;
-use Bogardo\Mailgun\Facades\Mailgun;
 use Illuminate\Support\Facades\Route;
 
 class RegisterController extends Controller
@@ -118,17 +117,15 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:128',
         ]);
 
-        Mailgun::api()->post("lists/" . env('MAILGUN_NEWSLETTER_ALIAS') . "/members", [
-            'address' => $data['email'],
-            'name' => $data['name'],
-            'subscribed' => 'yes',
-            'upsert' => 'yes'
+        $this->dispatchFrom('App\Jobs\AddUserToMailingList', $request, [
+            'list' => env('MAILGUN_NEWSLETTER_ALIAS')
         ]);
 
-        Mailgun::send('emails.welcome', $data, function ($message) use ($data) {
-            $message->to($data['email'], $data['name'])
-                ->subject('Welcome to ' . env('APP_NAME') . ', ' . $data['name'] . '.');
-        });
+        $this->dispatchFrom('App\Jobs\SendEmail', $request, [
+            'template' => 'emails.welcome',
+            'subject' => 'Welcome to ' . env('APP_NAME') . '.',
+            'data' => $data
+        ]);
 
         return back()->with('success', $data['email'] . ' was subscribed.');
     }
