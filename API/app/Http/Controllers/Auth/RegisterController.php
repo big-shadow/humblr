@@ -93,7 +93,7 @@ class RegisterController extends Controller
             'client_secret' => $client->secret,
             'username' => $user->email,
             'password' => $userData['password'],
-            'scope' => null,
+            'scope' => '',
         ]);
 
         $sessionResponse = Route::dispatch($sessionRequest);
