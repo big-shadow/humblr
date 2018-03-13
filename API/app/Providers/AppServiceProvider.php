@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('MailerInterface', 'MailgunWrapper');
+        $this->app->bind('MailerInterface', 'App\MailgunWrapper');
 
         $this->app->bind('mailgun.client', function () {
             return GuzzleAdapter::createWithConfig([

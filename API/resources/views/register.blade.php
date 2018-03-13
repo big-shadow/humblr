@@ -15,6 +15,7 @@
     @endif
 
     {!! Form::open(['action' => 'Auth\RegisterController@registerAdminWithNewVenue', 'class' => 'registration--form']) !!}
+    <h4>You</h4>
     <div class="row">
         <div class="six columns">
             {{ Form::label('name', 'Your Name') }}
@@ -36,6 +37,7 @@
         </div>
     </div>
     <hr>
+    <h4>Your Business</h4>
     <div class="row">
         <div class="six columns">
             {{ Form::label('title', 'Business Name') }}

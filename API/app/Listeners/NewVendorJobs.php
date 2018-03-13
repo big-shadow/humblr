@@ -20,21 +20,19 @@ class NewVendorJobs
      */
     public function handle(NewVendor $event)
     {
-        $createMailingListJob = new CreateMailingList(
-            $event->vendor->subdomain,
-            $event->vendor->id,
-            $event->vendor->title
-        );
-
         $addToListJob = new AddUserToMailingList(
             env('MAILGUN_NEWSLETTER_ALIAS'),
             $event->user->email,
             $event->user->name
         );
 
-        $createMailingListJob->withChain([
+        CreateMailingList::withChain([
             $addToListJob
-        ])->dispatch();
+        ])->dispatch(
+            $event->vendor->subdomain,
+            $event->vendor->id,
+            $event->vendor->title
+        );
 
         $sendEmail = new SendEmail(
             'emails.welcome',

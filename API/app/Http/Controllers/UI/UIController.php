@@ -29,7 +29,7 @@ class UIController extends Controller
             'client_id' => $client->id,
             'client_secret' => $client->secret,
             'page' => $page ?? 'dashboard',
-            'vendor' => $vendor->toJson()
+            'vendor' => $vendor
         ];
 
         if ($request->session()->has('session')) {

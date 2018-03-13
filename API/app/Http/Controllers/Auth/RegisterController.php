@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Laravel\Passport\Client;
 use App\Events\NewVendor;
 use Illuminate\Support\Facades\Route;
+use App\Jobs\AddUserToMailingList;
+use App\Jobs\SendEmail;
 
 class RegisterController extends Controller
 {
@@ -117,15 +119,19 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:128',
         ]);
 
-        $this->dispatchFrom('App\Jobs\AddUserToMailingList', $request, [
-            'list' => env('MAILGUN_NEWSLETTER_ALIAS')
-        ]);
+        $this->dispatch((new AddUserToMailingList(
+            env('MAILGUN_NEWSLETTER_ALIAS'),
+            $request->get('email'),
+            $request->get('name')
+        )));
 
-        $this->dispatchFrom('App\Jobs\SendEmail', $request, [
-            'template' => 'emails.welcome',
-            'subject' => 'Welcome to ' . env('APP_NAME') . '.',
-            'data' => $data
-        ]);
+        $this->dispatch((new SendEmail(
+            'emails.welcome',
+            $request->get('name'),
+            $request->get('email'),
+            'You\'ve been subscribed, ' . $request->get('name') . '.',
+            $data
+        )));
 
         return back()->with('success', $data['email'] . ' was subscribed.');
     }

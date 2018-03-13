@@ -35,8 +35,8 @@
 
     <header class="header">
         <div class="title">
-            <h1>{{ env("APP_NAME") }}</h1>
-            <span>Grow. Market. Distribute.</span>
+            <h1>{{ env("APP_NAME") }}.</h1>
+            <span>Grow &#9758; Market &#9758; Distribute</span>
         </div>
         <nav class="nav-links">
             <a href="/">About Us</a>

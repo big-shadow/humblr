@@ -38,22 +38,22 @@ body {
 .title > h1 {
     font-size: 8rem;
     font-weight: 600;
-    text-shadow: 0 0 50px black;
+    text-shadow: 0 0 35px black;
     margin-bottom: 0;
 }
 
 .title > span {
     font-size: 2rem;
     font-weight: 600;
-    text-shadow: 1px 1px 10px black;
+    text-shadow: 0 0 25px black;
 }
 
 .nav-links {
+    padding: 2px 0;
     background-color: black;
 }
 
 .nav-links > a {
-    /*color: #636b6f;*/
     color: #fff;
     padding: 0 25px;
     font-size: 12px;
@@ -61,6 +61,10 @@ body {
     letter-spacing: .1rem;
     text-decoration: none;
     text-transform: uppercase;
+}
+
+.nav-links > a:hover {
+    color: #636b6f
 }
 
 .container {
