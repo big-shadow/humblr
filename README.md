@@ -1,4 +1,4 @@
-# RoomService
+# Humblr
 The Developer's Reference. :)
 
 ## Getting Started
